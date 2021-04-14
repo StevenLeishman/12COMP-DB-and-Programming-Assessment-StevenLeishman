@@ -49,4 +49,9 @@ function draw() {
 function ui_switchScreens(_hideScreen, _showScreen) {
 	document.getElementById(_hideScreen).style.display = "none";
 	document.getElementById(_showScreen).style.display = "block";
+	if(_showScreen == "s_regPg"){
+		// document.getElementById("p_regName").innerHTML = userDetails.name
+		// document.getElementById("p_regEmail").innerHTML = userDetails.email
+		console.log(userDetails.name + "look at me")
+	}
 }

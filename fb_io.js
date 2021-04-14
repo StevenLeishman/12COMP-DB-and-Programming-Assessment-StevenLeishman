@@ -62,8 +62,7 @@ function fb_login(_dataRec) {
 		}
 	}
 	ui_switchScreens("s_landPg","s_regPg");
-	// document.getElementById(p_regName).innerHTML = userDetails.name
-	// document.getElementById(p_regEmail).innerHTML = userDetails.email
+	
 
 }
 

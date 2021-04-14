@@ -26,7 +26,7 @@
 function reg_regDetailsEntered() {
   console.log('reg_regDetailsEntered'); 
   
-  // Save player1's details from the form into your details and stats object
+  // Save player's details from the form into your details and stats object
   
 	//Data for userStats                                        
   userStats.gameName   		= reg_getFormItemValue("f_reg", 0);
