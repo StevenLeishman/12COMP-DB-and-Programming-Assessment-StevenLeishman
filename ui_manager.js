@@ -11,7 +11,6 @@ var userDetails = {
   email:    	'',
   name:				'',
   photoURL:		'',
-  score:	    '',
 	age:				'',
 	gender:			'',
 	phone:			'',

@@ -48,6 +48,7 @@ function fb_login(_dataRec) {
 			_dataRec.photoURL = _user.photoURL;
 			loginStatus = 'logged in';
 			console.log('fb_login: status = ' + loginStatus);
+			console.log(userDetails)
 		}
 		else {
 			// user NOT logged in, so redirect to Google login
@@ -61,7 +62,9 @@ function fb_login(_dataRec) {
 		}
 	}
 	ui_switchScreens("s_landPg","s_regPag");
-	
+	document.getElementById(p_regName).innerHTML = userDetails.name
+	document.getElementById(p_regEmail).innerHTML = userDetails.email
+
 }
 
 /**************************************************************/
@@ -73,6 +76,7 @@ function fb_login(_dataRec) {
 function fb_logout() {
 	console.log('fb_logout: ');
 	firebase.auth().signOut();
+	window.close()
 }
 
 /**************************************************************/

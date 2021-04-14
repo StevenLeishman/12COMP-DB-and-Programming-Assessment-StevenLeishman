@@ -15,29 +15,42 @@
     4. Taylor your ???????.js to fit your program code by looking       //<=======
          at lines ending with  //<=======                               //<=======
 *************************************************************/      
-  
-  // Save name & email into the form
-  document.getElementById("p_regName").innerHTML  = userDetails.name
-  document.getElementById("p_regEmail").innerHTML = userDetails.email       
 
 /**************************************************************/
 // reg_regDetailsEntered()
-// Input event; called when user clicks ?????????? button              //<========
+// Input event; called when user clicks submit button              //<========
 // Write user's details to DB
 // Input:   
 // Return:
 /**************************************************************/
 function reg_regDetailsEntered() {
   console.log('reg_regDetailsEntered'); 
-     
-  // Save player1's details from the form into your details object
-  //  ENSURE THE OBJECT NAME THE PROGRAM SAVES TO IS CORRECT; 
-  //    its currently details                                           //<======= 
-  userDetails.gameName     =        reg_getFormItemValue("f_reg", 0);       //<=======
-  userDetails.phone        = Number(reg_getFormItemValue("f_reg", 1));      //<=======
+  
+  // Save player1's details from the form into your details and stats object
+  
+	//Data for userStats                                        
+  userStats.gameName   		= reg_getFormItemValue("f_reg", 0);
+	
+	//Data for userDetails
+  userDetails.phone       	= reg_getFormItemValue("f_reg", 1);
+	userDetails.gender       	= reg_getFormItemValue("f_reg", 2);
+	userDetails.age     			= reg_getFormItemValue("f_reg", 3);
+	userDetails.city       		= reg_getFormItemValue("f_reg", 4);
+	// userDetails.suburb      = reg_getFormItemValue("f_reg", 5);
+	// userDetails.streetName  = reg_getFormItemValue("f_reg", 6);
+	// userDetails.houseNumber = reg_getFormItemValue("f_reg", 7);
+	// userDetails.postalCode  = reg_getFormItemValue("f_reg", 8);
+	// userDetails.backAccount = reg_getFormItemValue("f_reg", 9); 
     
   console.table(userDetails);
-  // call your function to write to details record firebase             //<=======
+  // call your function to write to details record firebase 
+	fb_writeRec(DETAILS,userDetails.uid,userDetails)
+	
+	// call your function to write to stats record firebase 
+	fb_writeRec(STATS,userDetails.uid,userStats)
+
+	//Call function to switch to home screen
+	ui_switchScreens('s_regPg','s_homePg')
 }
 
 /**************************************************************/
@@ -48,8 +61,8 @@ function reg_regDetailsEntered() {
 // Return: form item's value
 /**************************************************************/
 function reg_getFormItemValue(_elementId, _item) {
-  //console.log('reg_getFormItemValue: _elementId=' + _elementId +
-  //	  ',  _item= ' + _item);
+  console.log('reg_getFormItemValue: _elementId=' + _elementId +
+  	  ',  _item= ' + _item);
     
   return document.getElementById(_elementId).elements.item(_item).value;
 }
