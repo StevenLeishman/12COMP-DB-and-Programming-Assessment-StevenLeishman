@@ -48,7 +48,8 @@ function fb_login(_dataRec) {
 			_dataRec.photoURL = _user.photoURL;
 			loginStatus = 'logged in';
 			console.log('fb_login: status = ' + loginStatus);
-			console.log(userDetails)
+
+			fb_readRec(DETAILS,userDetails.uid,userDetails,fb_processUserDetails)
 		}
 		else {
 			// user NOT logged in, so redirect to Google login
@@ -58,11 +59,10 @@ function fb_login(_dataRec) {
 
 			var provider = new firebase.auth.GoogleAuthProvider();
 			firebase.auth().signInWithRedirect(provider);
-			console.log(provider)
 		}
 	}
-	ui_switchScreens("s_landPg","s_regPg");
-	
+	//Switch to registration page
+//	ui_switchScreens("s_landPg","s_regPg");
 
 }
 
@@ -89,7 +89,7 @@ function fb_writeRec(_path, _key, _data) {
 		'  data= ' + _data.name + '/' + _data.score);
 
 	writeStatus = "Pending"
-	firebase.database().ref(_path + '/' + _key).set(_data,
+	firebase.database().ref(_path + '/' + _key).update(_data,
 		function (error) {
 			if (error) {
 				writeStatus = "Failure"
@@ -176,7 +176,7 @@ function fb_readRec(_path, _key, _save, _functionToCall) {
 // Input: _userDetails and where to save it to 
 // Return:  
 /**************************************************************/
-function processUserStats(_userStats, _save) {
+function fb_processUserStats(_userStats, _save) {
 	let dbKeys = Object.keys(_userStats)
 	for (i = 0; i < dbKeys.length; i++) {
 		let key = dbKeys[i]
@@ -187,18 +187,20 @@ function processUserStats(_userStats, _save) {
 	}
 }
 /**************************************************************/
-// processUserDetails
+// fb_processUserDetails
 // processess code given by read rec and saves it
 // Input: code to process and where to save it
 // Return:  
 /**************************************************************/
-function processUserDetails(_userDetails, _save) {
-	_save.email = _userDetails.email;
-	_save.name = _userDetails.name;
-	_save.photoURL = _userDetails.photoURL;
-	_save.score = _userDetails.score;
-	_save.uid = _userDetails.uid;
+function fb_processUserDetails(_userDetails, _save) {
+	// _save.email = _userDetails.email;
+	// _save.name = _userDetails.name;
+	// _save.photoURL = _userDetails.photoURL;
+	// _save.score = _userDetails.score;
+	// _save.uid = _userDetails.uid;
+	console.log("_userDetails = "  + _userDetails + "  _save = " + _save)
 }
+
 /**************************************************************/
-//    END OF MODULE
+//    END OF PROG
 /**************************************************************/

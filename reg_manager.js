@@ -5,20 +5,13 @@
 // Written by Mr Bob 2020
 // v01 Initial code
 // v02 Include reg_getFormItemValue function in reg_manager.js 
-// v03 Add reg_prep function
 // v04 Add conversion from string to number for numeric feilds
 // v05 Cut down version
 /**************************************************************/
 
-/*************************************************************         
-  TO IMPLIMENT THE REGISTRATION FEATURE:                                                                        
-    4. Taylor your ???????.js to fit your program code by looking       //<=======
-         at lines ending with  //<=======                               //<=======
-*************************************************************/      
-
 /**************************************************************/
 // reg_regDetailsEntered()
-// Input event; called when user clicks submit button              //<========
+// Input event; called when user clicks submit button in reg form
 // Write user's details to DB
 // Input:   
 // Return:

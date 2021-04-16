@@ -52,6 +52,10 @@ function ui_switchScreens(_hideScreen, _showScreen) {
 	if(_showScreen == "s_regPg"){
 		// document.getElementById("p_regName").innerHTML = userDetails.name
 		// document.getElementById("p_regEmail").innerHTML = userDetails.email
-		console.log(userDetails.name + "look at me")
+		console.log(userDetails)
 	}
 }
+
+/**************************************************************/
+//    END OF PROG
+/**************************************************************/
