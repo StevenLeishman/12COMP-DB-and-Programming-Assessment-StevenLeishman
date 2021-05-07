@@ -1,6 +1,8 @@
 /**************************************************************/
 // fb_io.js
 // Written by steven leishman 2021
+//v1 base code from firebase miniskills
+//v2 reads the record and switchs to registration 
 /**************************************************************/
 
 /**************************************************************/
@@ -49,7 +51,8 @@ function fb_login(_dataRec) {
 			loginStatus = 'logged in';
 			console.log('fb_login: status = ' + loginStatus);
 
-			fb_readRec(DETAILS,userDetails.uid,userDetails,fb_processUserDetails)
+			//Call read function to 
+			fb_readRec(DETAILS, userDetails.uid, userDetails, fb_processUserDetails)
 		}
 		else {
 			// user NOT logged in, so redirect to Google login
@@ -59,10 +62,10 @@ function fb_login(_dataRec) {
 
 			var provider = new firebase.auth.GoogleAuthProvider();
 			firebase.auth().signInWithRedirect(provider);
+
 		}
 	}
-	//Switch to registration page
-//	ui_switchScreens("s_landPg","s_regPg");
+
 
 }
 
@@ -147,16 +150,17 @@ function fb_readRec(_path, _key, _save, _functionToCall) {
 	readStatus = "Pending"
 	console.log("readStatus = " + readStatus)
 	function gotRecord(snapshot) {
+		let dbData = snapshot.val()
 		if (snapshot.val() == null) {
+			//If no record
 			readStatus = "No record"
 			console.log("readStatus = " + readStatus)
+			_functionToCall(readStatus,dbData, _save)
+
 		} else {
 			readStatus = "OK"
 			console.log("readStatus = " + readStatus)
-			let dbData = snapshot.val() 
-
-			_functionToCall(dbData, _save)
-
+			_functionToCall(readStatus,dbData, _save)
 		}
 	}
 
@@ -188,17 +192,38 @@ function fb_processUserStats(_userStats, _save) {
 }
 /**************************************************************/
 // fb_processUserDetails
-// processess code given by read rec and saves it
+// processess code given by read rec and saves it to user Object
 // Input: code to process and where to save it
 // Return:  
 /**************************************************************/
-function fb_processUserDetails(_userDetails, _save) {
-	// _save.email = _userDetails.email;
-	// _save.name = _userDetails.name;
-	// _save.photoURL = _userDetails.photoURL;
-	// _save.score = _userDetails.score;
-	// _save.uid = _userDetails.uid;
-	console.log("_userDetails = "  + _userDetails + "  _save = " + _save)
+function fb_processUserDetails(_result,_dbData, _save) {
+	if(_result == "No Record"){
+		//Switch to register page
+		ui_switchScreens("s_landPg", "s_regPg");
+
+		document.getElementById("p_regName").innerHTML = userDetails.name
+		document.getElementById("p_regEmail").innerHTML = userDetails.email
+	} else {
+		_save.email = _dbData.email;
+		_save.name = _dbData.name;
+		_save.photoURL = _dbData.photoURL;
+		_save.age = _dbData.age;
+		_save.gender = _dbData.gender;
+		_save.phone = _dbData.phone;
+		_save.city = _dbData.city;
+		_save.suburb = _dbData.suburb;
+		_save.streetName = _dbData.streetName;
+		_save.houseNumber = _dbData.houseNumber;
+		_save.postalCode = _dbData.postalCode;
+		_save.backAccount = _dbData.backAccount;
+
+		console.log("_dbData = " + _dbData + "  _save = " + _save)
+
+		// switch screens to home page
+		ui_switchScreens("s_landPg","s_homePg")
+	}
+
+	
 }
 
 /**************************************************************/

@@ -9,39 +9,49 @@ html, body {
   color: black;
 }
 
+/* Landing Page stying */
 #s_landPg{
   display: block;
-  height: 100vh;
+  height: 95vh;
 }
 
+/* Home page stying */
 #s_homePg{
 	display: none;
-  height: 100vh;
-  
+  height: 95vh;
 }
 
+.homeBtnSize{
+ size: 100vh
+}
+
+/* Game page stying */
 #s_gamePg{
   display: none;
-  height: 100vh;
-  
+  height: 95vh;
 }
 
-#s_instructPg{
+.boxHeight{
+	height: 80;
+}
+
+/* Instruction page stying */
+#s_instructPg {
 	display: none;
-  height: 100vh;
-  
+  height: 95vh;
 }
 
+/* Leaderboard page stying */
 #s_leaderPg{
  	display: none;
-  height: 100vh;
+  height: 95vh;
   
 }
 
-//Registration page styling
+/* Registration Page Styling */
 #s_regPg{
   display: none;
-  height:  100vh;
+  height:  95vh;
 }
 
 .transparentBG {

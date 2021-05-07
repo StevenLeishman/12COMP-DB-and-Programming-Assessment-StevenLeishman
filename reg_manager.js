@@ -22,18 +22,18 @@ function reg_regDetailsEntered() {
   // Save player's details from the form into your details and stats object
   
 	//Data for userStats                                        
-  userStats.gameName   		= reg_getFormItemValue("f_reg", 0);
+  userStats.gameName   			= reg_getFormItemValue("f_reg", 0);
 	
 	//Data for userDetails
-  userDetails.phone       	= reg_getFormItemValue("f_reg", 1);
+  userDetails.phone       	= Number(reg_getFormItemValue("f_reg", 1));
 	userDetails.gender       	= reg_getFormItemValue("f_reg", 2);
-	userDetails.age     			= reg_getFormItemValue("f_reg", 3);
-	userDetails.city       		= reg_getFormItemValue("f_reg", 4);
-	// userDetails.suburb      = reg_getFormItemValue("f_reg", 5);
-	// userDetails.streetName  = reg_getFormItemValue("f_reg", 6);
-	// userDetails.houseNumber = reg_getFormItemValue("f_reg", 7);
-	// userDetails.postalCode  = reg_getFormItemValue("f_reg", 8);
-	// userDetails.backAccount = reg_getFormItemValue("f_reg", 9); 
+	userDetails.age     			= Number(reg_getFormItemValue("f_reg", 3));
+	userDetails.houseNumber		= Nubmer(reg_getFormItemValue("f_reg", 4));
+	userDetails.city 					= reg_getFormItemValue("f_reg", 5);
+	userDetails.suburb     		= reg_getFormItemValue("f_reg", 6);
+	userDetails.streetName  	= reg_getFormItemValue("f_reg", 7);
+	userDetails.postalCode  	= Number(reg_getFormItemValue("f_reg", 8));
+	userDetails.bankAccount		= Number(reg_getFormItemValue("f_reg", 9)); 
     
   console.table(userDetails);
   // call your function to write to details record firebase 

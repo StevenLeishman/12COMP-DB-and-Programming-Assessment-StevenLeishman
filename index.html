@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet"    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- P5.js ------------------------------------------------------------------------>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js">
 
@@ -37,10 +37,18 @@
 	</script>
 	<!-- firebase end ----------------------------------------------------------------->
 
-	<script defer src="fb_io.js"></script>
-	<script defer src="ui_manager.js"></script>
-	<script defer src="reg_manager.js">	</script>
-	<script defer src="bb_manager.js">	</script>
+	<script defer src="fb_io.js">
+
+	</script>
+	<script defer src="ui_manager.js">
+
+	</script>
+	<script defer src="reg_manager.js">
+
+	</script>
+	<script defer src="bb_manager.js">
+
+	</script>
 </head>
 
 <!--*****************************************************-->
@@ -57,9 +65,7 @@
 		<h2>LandPage</h2>
 		<button class="w3-button w3-green" 
 						onclick="fb_login(userDetails)" >login</button>
-		<button class="w3-button w3-green" 
-						onclick="ui_switchScreens('s_landPg','s_regPg')" >Register(will actually be login(testing))</button>
-		<button class="w3-button w3-green" 
+		<button class="w3-button w3-red" 
 						onclick="fb_logout()" >logout</button>
 	</section> 
 
@@ -69,13 +75,13 @@
 	<section id="s_homePg"> 
 		<h1>Welcome to Stevens Game Website</h1> 
 		<h2>HomePage</h2>
-		<button class="w3-button w3-green" 
+		<button class="w3-button w3-green homeBtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_gamePg')" >Bouncing Ball game</button>
-		<button class="w3-button w3-green" 
+		<button class="w3-button w3-green homeBtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_instructPg')" >Instructions</button>
-		<button class="w3-button w3-green" 
+		<button class="w3-button w3-green homeBtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_leaderPg')" >Leaderboard</button>
-		<button class="w3-button w3-green" 
+		<button class="w3-button w3-green homeBtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_landPg')" >Back to landing </button>
 	</section> 
 
@@ -89,18 +95,24 @@
     <div class="w3-row">
 			<div class="w3-col m2 w3-container w3-red boxHeight">
 				<h2>Control Panel</h2>
+
+				<button class="w3-button w3-green" 
+					onclick="bb_startBtn()">Start</button>
+
 				<p id="p_misses">Misses : </p><br>
         <p id="p_score">Score : </p><br>
         <p id="p_time">time : </p><br>
+
+				<button class="w3-button w3-green" 
+						onclick="ui_switchScreens('s_gamePg','s_homePg')" >Return</button>
 			</div>
 
-			<div id="d_gameArea" class="w3-col m9 w3-container boxHeight" >
+			<!-- Space where canvas will be  -->
+			<div id="d_gameArea" class="w3-col m9 w3-container boxHeight w3-light-grey" >
 			</div>
 
-		<button class="w3-button w3-green" 
-						onclick="ui_switchScreens('s_gamePg','s_gamePg')" >Start(theoretical)</button>
-		<button class="w3-button w3-green" 
-						onclick="ui_switchScreens('s_gamePg','s_homePg')" >Home</button>
+		
+		
 	</section> 
 
 	<!--*******************************************************--> 
@@ -109,8 +121,19 @@
 	<section id="s_instructPg"> 
 		<h1>Welcome to Stevens Game Website</h1> 
 		<h2>INSTRUCTIONS</h2>
-		<button class="w3-button w3-green" 
-						onclick="ui_switchScreens('s_instructPg','s_homePg')" >Home</button>
+		
+		<div class="w3-row">
+			<div class="w3-container w3-red boxHeight w3-col m2">
+				<h2>Control Panel</h2>
+				<button class="w3-button w3-green" 
+							onclick="ui_switchScreens('s_instructPg','s_homePg')" >Home</button>
+				
+			</div>
+
+			<div class="w3-container w3-light-grey w3-col m9 boxHeight">
+
+			</div>
+		</div>
 	</section> 
 
 	<!--*******************************************************-->
@@ -119,8 +142,19 @@
 	<section id="s_leaderPg"> 
 		<h1>Welcome to Stevens Game Website</h1>
 		<h2>LEADERBOARD</h2>
-		<button class="w3-button w3-green" 
-						onclick="ui_switchScreens('s_leaderPg','s_homePg')" >Home</button>
+
+		<div class="w3-row">
+			<div class="w3-container w3-red boxHeight w3-col m2">
+				<h2>Control Panel</h2>
+				<button class="w3-button w3-green" 
+								onclick="ui_switchScreens('s_leaderPg','s_homePg')" >Home</button>
+			</div>
+
+			<div class="w3-container w3-light-grey w3-col m9 boxHeight">
+
+			</div>
+		</div>
+		
 	</section>
 
 	<!--*******************************************************-->
@@ -129,16 +163,16 @@
 	<section id="s_regPg">
 		<!--Registration form 
 		-------------------------------------------------------------->
-    <div class="w3-container w3-col s11 m11 l11 w3-small">
+    <div class="w3-container w3-col s12 m12 l12">
       <form id="f_reg" class="w3-container w3-card-4 transparentBG">
         <h1 class="w3-center headFont">Register</h1>
 
 				<!--First Row
-				Includes Email and Name given by google login------------------------------->
+				Includes Email and Name given by google login-->
         <div class="w3-row w3-section">
           <div class="w3-col w3-margin-top" style="width: 50px">
             <i class="w3-xlarge fa fa-user"></i></div>
-          <div class="w3-col m3">
+          <div class="w3-col m5">
             <p id="p_regName" class="w3-white w3-border w3-padding" style="height: 35px;"></p>
           </div>
           <div class="w3-col m1">.</div>
@@ -148,20 +182,17 @@
             <p id="p_regEmail" class="w3-white w3-border w3-padding" style="height: 35px;"></p>
           </div>
         </div>
+
 				<!--Second Row
-				Asks for game name -------------------------------------------->
-        <div class="w3-row">
+				Asks for game name and phone number-->
+        <div class="w3-row w3-section">
           <div class="w3-col" style="width: 50px">
             <i class="w3-xlarge fa fa-user-circle"></i></div>
-          <div class="w3-rest">
+          <div class="w3-col m5">
             <input class="w3-input w3-border" required name="gameName" 
                    type="text" placeholder="Game Name">
           </div>
-        </div>
-
-				<!--Third Row
-				Asks for phone number ------------------------------------------>
-        <div class="w3-row w3-section">
+					<div class="w3-col m1">.</div>
           <div class="w3-col" style="width: 50px">
             <i class="w3-xlarge fa fa-phone"></i></div>
           <div class="w3-rest">
@@ -170,14 +201,14 @@
           </div>
         </div>
 
-				<!--Fourth Row
-				Asks for gender and age -->
+				<!--Third Row
+				Asks for gender and age and house number -->
         <div class="w3-row w3-section">
           <div class="w3-col" style="width: 50px">
             <img src="images/noun_Gender Neutral_14064.png" 
                  alt="Gender symbol" width="40" height="30"></div>
           <div class="w3-col m3">
-            <select id="gender" style="height: 35px;">
+            <select id="gender" class="w3-col m3" style="height: 35px;">
               <option value="f">female</option>
               <option value="m">male</option>
               <option value="o">other</option>
@@ -188,36 +219,78 @@
           <div class="w3-col" style="width: 50px">
             <img src="images/noun_age_2941875.png" 
                  alt="age" width="40" height="40"></div>
-          <div class="w3-rest">
+          <div class="w3-col m3">
             <input class="w3-input w3-border" min="16" required name="age" 
                    type="number" placeholder="Age">
           </div>
-        </div>
-				<!--fifth Row
-				Asks for City  -->
-				<div class="w3-row w3-section">
+					<div class="w3-col m1">.</div>
           <div class="w3-col" style="width: 50px">
-            <img src="images/noun_City_3386652.png" 
-                 alt="City Symbol" width="40" height="30"></div>
-          <div class="w3-col m3">
-            <input class="w3-input w3-border" required  name="city" type="text" placeholder="City">
-        	</div>
-
-          <div class="w3-col m1">.</div>
-
-          <div class="w3-col" style="width: 50px">
+            <img src="images/noun_Number_2453943.png" 
+                 alt="Number icon" width="40" height="40"></div>
           <div class="w3-rest">
-            <input type ="Submit" class="w3-input w3-border w3-green" 
-							onclick="reg_regDetailsEntered()" name="Sumbit" placeholder="Sumbit">
+            <input class="w3-input w3-border" required name="houseNumber" 
+                   type="Number" placeholder="House Number">
           </div>
         </div>
-				<!-- Sumbit button
-				 ---------------------------->
-				
+
+				<!--Fourth Row
+				Asks for City, neighborhood and street name-->
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width: 50px">
+            <img src="images/noun_City_3386652.png" 
+                 alt="City Icon" width="40" height="30"></div>
+          <div class="w3-col m2">
+            <input class="w3-input w3-border" required name="city" 
+                   type="text" placeholder="City"></input>
+          </div>
+          <div class="w3-col m1">.</div>
+          <div class="w3-col" style="width: 50px">
+            <img src="images/noun_neighborhood_1240929.png" 
+                 alt="Suburb icon" width="40" height="40"></div>
+          <div class="w3-col m2">
+            <input class="w3-input w3-border" required name="suburb" 
+                   type="text" placeholder="Suburb">
+          </div>
+					<div class="w3-col m1">.</div>
+          <div class="w3-col" style="width: 50px">
+            <img src="images/noun_street_104295.png" 
+                 alt="Street icon" width="40" height="40"></div>
+          <div class="w3-col m2">
+            <input class="w3-input w3-border" required name="street" 
+                   type="text" placeholder="Street">
+          </div>
+        </div>
+
+				<!-- Fifth Row
+				Asks for Postal code and Bank account number -->
+        <div class="w3-row w3-section">
+					
+          <div class="w3-col" style="width: 50px">
+            <img src="images/noun_postcode_944762.png" 
+                 alt="postcode icon" width="40" height="40"></div>
+          <div class="w3-col m3">
+            <input class="w3-input w3-border" required name="postalCode" 
+                   type="number" placeholder="Postal Code">
+          </div>
+					<div class="w3-col m1">.</div>
+          <div class="w3-col" style="width: 50px">
+            <i class="w3-xlarge fas fa-money-check"></i></div>
+          <div class="w3-col m3">
+            <input class="w3-input w3-border" required name="bankAccount" 
+                   type="number" placeholder="Bank Details">
+          </div>
+					<div class="w3-col m1">.</div>
+					<div class="w3-rest">
+            <input type ="button" class="w3-input w3-border w3-green" 
+							onclick="reg_regDetailsEntered()" value="submit" name="Sumbit" placeholder="Sumbit">
+          </div>
+        </div>
+
+				<!--Registration form end
+				------------------------------------------------->
       </form>
     </div>
-		<!--Registration form end
-		------------------------------------------------->
+		
   </section>
 	<!--*******************************************************-->
 	<!--Section end-->
