@@ -66,7 +66,8 @@
 		<button class="w3-button w3-green" 
 						onclick="fb_login(userDetails)" >login</button>
 		<button class="w3-button w3-red" 
-						onclick="fb_logout()" >logout</button>
+						onclick="fb_logout()" >logout</button><br>
+		<p id="p_loginStatus"> Login Status = </p>
 	</section> 
 
 	<!--*******************************************************--> 
@@ -76,11 +77,8 @@
 		<h1>Welcome to Stevens Game Website</h1> 
 		<h2>HomePage</h2>
 		<button class="w3-button w3-green homeBtnSize" 
-						onclick="ui_switchScreens('s_homePg','s_gamePg')" >Bouncing Ball game</button>
-		<button class="w3-button w3-green homeBtnSize" 
-						onclick="ui_switchScreens('s_homePg','s_instructPg')" >Instructions</button>
-		<button class="w3-button w3-green homeBtnSize" 
-						onclick="ui_switchScreens('s_homePg','s_leaderPg')" >Leaderboard</button>
+						onclick="ui_switchScreens('s_homePg','s_gamePg')" >Pop The Ball </button>
+		
 		<button class="w3-button w3-green homeBtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_landPg')" >Back to landing </button>
 	</section> 
@@ -102,6 +100,16 @@
 				<p id="p_misses">Misses : </p><br>
         <p id="p_score">Score : </p><br>
         <p id="p_time">time : </p><br>
+
+				<!-- Instruction button -->
+				<button class="w3-button w3-green homeBtnSize" 
+								onclick="ui_switchScreens('s_homePg','s_instructPg')">
+								Instructions</button>
+				
+				<!-- Leaderboard Button -->
+				<button class="w3-button w3-green homeBtnSize" 
+								onclick="ui_switchScreens('s_homePg','s_leaderPg')">
+								Leaderboard</button>
 
 				<button class="w3-button w3-green" 
 						onclick="ui_switchScreens('s_gamePg','s_homePg')" >Return</button>
@@ -131,7 +139,13 @@
 			</div>
 
 			<div class="w3-container w3-light-grey w3-col m9 boxHeight">
-
+				<h2>Welcome to the instruction page</h2><br>
+				<ul>
+					<li>The aim of the game is to get the highest score in 30 seconds</li>
+					<li>To do this, you need to click on as many balls as you can until the time runs out. Your score is your hits minus your misses </li>
+					<li>Each ball you click will add one to your hits, but be careful, everytime you miss... </li>
+					<li>The game ends when your time is up</li>
+				</ul>
 			</div>
 		</div>
 	</section> 

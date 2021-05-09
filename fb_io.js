@@ -40,6 +40,7 @@ function fb_initialise() {
 /**************************************************************/
 function fb_login(_dataRec) {
 	console.log('fb_login: dataRec= ' + _dataRec);
+	loginStatus = 'Pending';
 	firebase.auth().onAuthStateChanged(newLogin);
 	function newLogin(_user) {
 		if (_user) {

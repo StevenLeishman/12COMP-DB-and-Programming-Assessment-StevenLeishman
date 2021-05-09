@@ -2,21 +2,8 @@
 bb_manager.js
 Written by steven leishman 2021
 v1 base code from miniskills
+v2 adapted to work from button
 **************************************************************/
-
-
-// scoreText = createP("Score : " + score);
-// missesText = createP("Misses : " + misses)
-
-
-/*******************************************************/
-//function mousePressed()
-//Called whenever the mouse is clicked
-/*******************************************************/
-function mousePressed() {
-	console.log("test")
-	//checkBallHit()
-}
 
 /*******************************************************/
 //function createBall()
@@ -26,10 +13,10 @@ function mousePressed() {
 //Returns: N/A
 /*******************************************************/
 function bb_createBall(_ballAmount, _diameter) {
-
+	console.log("bb_createBall(_ballAmount,-diameter)  / _ballAmount = " + 											_ballAmount + " / _diameter = " + _diameter)
 	for (var i = 0; i < _ballAmount; i++) {
 		ballsArray[i] = {
-			posX: width / 2,
+			posX: gameCanvas / 2,
 			posY: height / 2,
 			diameter: _diameter,
 			speedX: random(velArray),
@@ -79,6 +66,7 @@ function bb_createBall(_ballAmount, _diameter) {
 				for (var i = 0; i < ballsArray.length; i++) {
 					var px2Ball = dist(this.posX, this.posY, mouseX, mouseY);
 					if (px2Ball <= this.diameter / 2) {
+						console.log('px2Ball = '+ px2Ball + "  diameter = " + diameter)
 						ballHit = true;
 						ballsArray.splice(i, 1);
 					}
@@ -92,22 +80,6 @@ function bb_createBall(_ballAmount, _diameter) {
 		}
 	}
 }
-/*******************************************************/
-//function changeText()
-//Creates the text that shows the score and the misses
-//Called by: N/A
-//Input: N/A
-//Returns: N/A
-/*******************************************************/
-function changeText() {
-	scoreText.html("Score : " + score)
-	scoreText.position(50, 50)
-	scoreText.style("font-size", "25px")
-	missesText.html("Misses : " + misses)
-	missesText.position(50, 75)
-	missesText.style("font-size", "25px")
-}
-
 
 /*******************************************************/
 //function bb_startBtn()
@@ -124,13 +96,7 @@ function bb_startBtn() {
 	var elmnt = document.getElementById("d_gameArea")
 	gameCanvas.resize(elmnt.offsetWidth, elmnt.offsetHeight)
 	gameCanvas.parent(d_gameArea)
-	
 }
-
-
-
-
-
 
 /**************************************************************/
 //   END OF PROG
