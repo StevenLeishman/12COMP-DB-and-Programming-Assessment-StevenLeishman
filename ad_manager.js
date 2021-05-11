@@ -192,7 +192,7 @@ function ad_processBBReadAll(_result, _dbRec) {
                   1, STATS);                                                //<=======
   } else if (_result == 'No Record') {
     ad_displayAll("t_userData", ad_adminArray, true, "", "", "", 
-                  1, STATS;                                                //<=======
+                  1, STATS);                                                //<=======
   }
 }
 
