@@ -37,12 +37,12 @@
 	</script>
 	<!-- firebase end ----------------------------------------------------------------->
 
-	<script defer src="fb_io.js">
+	<script src="fb_io.js">
 
 	</script>
 	<script defer src="ui_manager.js">
-
 	</script>
+	<script defer src="ad_manager.js"></script>
 	<script defer src="reg_manager.js">
 
 	</script>
@@ -80,7 +80,10 @@
 						onclick="ui_switchScreens('s_homePg','s_gamePg')" >Pop The Ball </button>
 		
 		<button class="w3-button w3-green homeBtnSize" 
-						onclick="ui_switchScreens('s_homePg','s_landPg')" >Back to landing </button>
+						onclick="ad_admin()" >Admin</button>
+		
+		<button class="w3-button w3-green homeBtnSize" 
+						onclick="ui_switchScreens('s_homePg','s_landPg')" >Exit</button>
 	</section> 
 
 	<!--*******************************************************--> 
@@ -94,7 +97,7 @@
 			<div class="w3-col m2 w3-container w3-red boxHeight">
 				<h2>Control Panel</h2>
 
-				<button class="w3-button w3-green" 
+				<button id="b_startBtn" class="w3-button w3-green" 
 					onclick="bb_startBtn()">Start</button>
 
 				<p id="p_misses">Misses : </p><br>
@@ -103,15 +106,19 @@
 
 				<!-- Instruction button -->
 				<button class="w3-button w3-green homeBtnSize" 
-								onclick="ui_switchScreens('s_homePg','s_instructPg')">
-								Instructions</button>
+								onclick="ui_switchScreens('s_gamePg','s_instructPg')">
+								Instructions</button><br>
 				
 				<!-- Leaderboard Button -->
 				<button class="w3-button w3-green homeBtnSize" 
-								onclick="ui_switchScreens('s_homePg','s_leaderPg')">
-								Leaderboard</button>
+								onclick="ui_leaderboardBtn()">
+								Leaderboard</button><br>
 
-				<button class="w3-button w3-green" 
+				<!--Admin Button  -->
+				<button class="w3-button w3-green homeBtnSize" 
+								onclick="ad_admin()" >Admin</button>
+
+				<button class="w3-button w3-green homeBtnSize" 
 						onclick="ui_switchScreens('s_gamePg','s_homePg')" >Return</button>
 			</div>
 
@@ -134,7 +141,8 @@
 			<div class="w3-container w3-red boxHeight w3-col m2">
 				<h2>Control Panel</h2>
 				<button class="w3-button w3-green" 
-							onclick="ui_switchScreens('s_instructPg','s_homePg')" >Home</button>
+							onclick="ui_switchScreens('s_instructPg','s_gamePg')" >
+							Return</button>
 				
 			</div>
 
@@ -146,6 +154,7 @@
 					<li>Each ball you click will add one to your hits, but be careful, everytime you miss... </li>
 					<li>The game ends when your time is up</li>
 				</ul>
+
 			</div>
 		</div>
 	</section> 
@@ -159,13 +168,19 @@
 
 		<div class="w3-row">
 			<div class="w3-container w3-red boxHeight w3-col m2">
-				<h2>Control Panel</h2>
+				<h2>Control Panel</h2><br>
+				<p id=""
 				<button class="w3-button w3-green" 
-								onclick="ui_switchScreens('s_leaderPg','s_homePg')" >Home</button>
+								onclick="ui_switchScreens('s_leaderPg','s_gamePg')">
+								Return</button>
 			</div>
 
 			<div class="w3-container w3-light-grey w3-col m9 boxHeight">
-
+				<ul>
+					<li id="li_leader1">test</li>
+					<li id="li_leader2">test</li>
+					<li id="li_leader3">test</li>
+				</ul>
 			</div>
 		</div>
 		
@@ -306,6 +321,39 @@
     </div>
 		
   </section>
+
+<!--*************************************************************
+			ADMIN PAGE 
+*************************************************************-->
+  <section id="s_adminPg" class="w3-grey">
+    <div class="w3-row">
+      <div class="w3-container w3-grey w3-col m10">
+        <h1 class="w3-wide">Admin page</h1>
+      </div>
+    </div>
+    
+    <nav id="n_admin" class="w3-bar stickyNav">
+      <button id="b_adHome" class="w3-button w3-block w3-col m3 
+                                   w3-medium w3-ripple w3-border" 
+              onclick="ad_home()" value="Submit">home
+	  </button>
+      <button id="b_adUser" class="w3-button w3-block w3-col m3 
+                                   w3-medium w3-ripple w3-small w3-border" 
+              onclick="ad_user()" value="Submit">users
+      </button>
+      <button id="b_adBB" class="w3-button w3-block w3-col m3 
+                                 w3-medium w3-ripple w3-small w3-border" 
+              onclick="ad_BB()" value="Submit">BB
+      </button>
+    </nav>
+      
+    <div>
+      <div id="d_admin" class="w3-table-all w3-small w3-light-grey 
+                               w3-hoverable w3-border w3-bordered content">
+	    <table id="t_userData"></table>
+	  </div>
+    </div>
+  </section> 
 	<!--*******************************************************-->
 	<!--Section end-->
 	<!--*******************************************************-->

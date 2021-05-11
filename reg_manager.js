@@ -7,6 +7,10 @@
 // v02 Include reg_getFormItemValue function in reg_manager.js 
 // v04 Add conversion from string to number for numeric feilds
 // v05 Cut down version
+
+//Versions written by Steven leishman 2021
+//V1 inital code from Mr Bob
+//V2 Change object to suit my program and write details/stats to database
 /**************************************************************/
 
 /**************************************************************/
@@ -28,7 +32,7 @@ function reg_regDetailsEntered() {
   userDetails.phone       	= Number(reg_getFormItemValue("f_reg", 1));
 	userDetails.gender       	= reg_getFormItemValue("f_reg", 2);
 	userDetails.age     			= Number(reg_getFormItemValue("f_reg", 3));
-	userDetails.houseNumber		= Nubmer(reg_getFormItemValue("f_reg", 4));
+	userDetails.houseNumber		= Number(reg_getFormItemValue("f_reg", 4));
 	userDetails.city 					= reg_getFormItemValue("f_reg", 5);
 	userDetails.suburb     		= reg_getFormItemValue("f_reg", 6);
 	userDetails.streetName  	= reg_getFormItemValue("f_reg", 7);

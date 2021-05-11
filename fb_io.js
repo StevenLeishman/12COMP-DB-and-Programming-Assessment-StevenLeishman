@@ -2,12 +2,15 @@
 // fb_io.js
 // Written by steven leishman 2021
 //v1 base code from firebase miniskills
-//v2 reads the record and switchs to registration 
+//v2 Switchs to registration if there is no record when login pressed 
+//V3 
 /**************************************************************/
-
+loginStatus = ''
+readStatus = ''
+writeStatus = ''
 /**************************************************************/
 // fb_initialise()
-// Called by setup
+// Called by: setup
 // Initialize firebase
 // Input:  n/a
 // Return: n/a
@@ -35,12 +38,15 @@ function fb_initialise() {
 /**************************************************************/
 // fb_login(_dataRec)
 // Login to Firebase
+// Called by: Login button
 // Input:  to store user info in
 // Return: n/a
 /**************************************************************/
 function fb_login(_dataRec) {
 	console.log('fb_login: dataRec= ' + _dataRec);
 	loginStatus = 'Pending';
+	ui_changeHTML("p_loginStatus","Login Status = " + loginStatus)
+
 	firebase.auth().onAuthStateChanged(newLogin);
 	function newLogin(_user) {
 		if (_user) {
@@ -49,7 +55,8 @@ function fb_login(_dataRec) {
 			_dataRec.email = _user.email;
 			_dataRec.name = _user.displayName;
 			_dataRec.photoURL = _user.photoURL;
-			loginStatus = 'logged in';
+			loginStatus = 'Logged in, please wait';
+			ui_changeHTML("p_loginStatus","Login Status = " + loginStatus)
 			console.log('fb_login: status = ' + loginStatus);
 
 			//Call read function to 
@@ -58,8 +65,10 @@ function fb_login(_dataRec) {
 		else {
 			// user NOT logged in, so redirect to Google login
 			_dataRec = {};
-			loginStatus = 'logged out';
+
+			loginStatus = 'Logged out';
 			console.log('fb_login: status = ' + loginStatus);
+			ui_changeHTML("p_loginStatus","Login Status = " + loginStatus)
 
 			var provider = new firebase.auth.GoogleAuthProvider();
 			firebase.auth().signInWithRedirect(provider);
@@ -73,6 +82,7 @@ function fb_login(_dataRec) {
 /**************************************************************/
 // fb_logout()
 // Logout of Firebase
+// Called by: Logout button
 // Input:  n/a
 // Return: n/a
 /**************************************************************/
@@ -85,6 +95,7 @@ function fb_logout() {
 /**************************************************************/
 // fb_writeRec(_path, _key, _data)
 // Write a specific record & key to the DB
+// Called by: Submit Registration button, 
 // Input:  path to write to, the key, data to write
 // Return: 
 /**************************************************************/
@@ -119,13 +130,15 @@ function fb_readAll(_path, _save, _functionToCall) {
 	readStatus = "Pending"
 	function gotRecord(snapshot) {
 		if (snapshot.val() == null) {
-			readStatus = "No record"
+			readStatus = "No Record"
+			console.log(readStatus)
 		} else {
+			console.log(readStatus)
 			readStatus = "OK"
 			let dbData = snapshot.val()
 			console.log(dbData)
 
-			_functionToCall(dbData, _save)
+			_functionToCall(readStatus, dbData,_save)
 		}
 	}
 
@@ -154,13 +167,15 @@ function fb_readRec(_path, _key, _save, _functionToCall) {
 		let dbData = snapshot.val()
 		if (snapshot.val() == null) {
 			//If no record
-			readStatus = "No record"
+			readStatus = "No Record"
 			console.log("readStatus = " + readStatus)
 			_functionToCall(readStatus,dbData, _save)
 
 		} else {
+			// if record
 			readStatus = "OK"
 			console.log("readStatus = " + readStatus)
+
 			_functionToCall(readStatus,dbData, _save)
 		}
 	}
@@ -175,36 +190,40 @@ function fb_readRec(_path, _key, _save, _functionToCall) {
 }
 
 /**************************************************************/
-// processUserStats
-// Reads code from db under userStats and processess it
-// There is currently no userStats
-// Input: _userDetails and where to save it to 
+// fb_processUserStats
+// Reads all userStats keys for leaderboard
+// Called by: fb_readAll
+// Input: key to read from and where to save it to 
 // Return:  
 /**************************************************************/
-function fb_processUserStats(_userStats, _save) {
-	let dbKeys = Object.keys(_userStats)
+function fb_processUserStats(_result,_dbData, _save) {
+	let dbKeys = Object.keys(_dbData)
 	for (i = 0; i < dbKeys.length; i++) {
 		let key = dbKeys[i]
 		_save.push({
-			gameName: _userStats[key].gameName,
-			highScore: _userStats[key].highScore
+			gameName: _dbData[key].gameName,
+			highScore: _dbData[key].highScore
 		});
 	}
+	
 }
 /**************************************************************/
 // fb_processUserDetails
 // processess code given by read rec and saves it to user Object
+// Called by: fb_readRec()
 // Input: code to process and where to save it
 // Return:  
 /**************************************************************/
 function fb_processUserDetails(_result,_dbData, _save) {
+	console.log("fb_processUserDetails" + " _result = " + _result + " _save = " + _save)
 	if(_result == "No Record"){
-		//Switch to register page
+		//Switch to register page if no recrod
 		ui_switchScreens("s_landPg", "s_regPg");
 
 		document.getElementById("p_regName").innerHTML = userDetails.name
 		document.getElementById("p_regEmail").innerHTML = userDetails.email
 	} else {
+		//if record save it to user object
 		_save.email = _dbData.email;
 		_save.name = _dbData.name;
 		_save.photoURL = _dbData.photoURL;

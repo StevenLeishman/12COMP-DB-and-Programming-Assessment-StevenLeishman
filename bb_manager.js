@@ -1,8 +1,9 @@
 /**************************************************************
 bb_manager.js
 Written by steven leishman 2021
-v1 base code from miniskills
-v2 adapted to work from button
+V1 base code from miniskills
+V2 game adapted to start from button
+V3 Button switchs from start to stop on click
 **************************************************************/
 
 /*******************************************************/
@@ -13,7 +14,8 @@ v2 adapted to work from button
 //Returns: N/A
 /*******************************************************/
 function bb_createBall(_ballAmount, _diameter) {
-	console.log("bb_createBall(_ballAmount,-diameter)  / _ballAmount = " + 											_ballAmount + " / _diameter = " + _diameter)
+	console.log("bb_createBall(_ballAmount,-diameter)  / _ballAmount = " + 
+							_ballAmount + " / _diameter = " + _diameter)
 	for (var i = 0; i < _ballAmount; i++) {
 		ballsArray[i] = {
 			posX: gameCanvas / 2,
@@ -83,7 +85,7 @@ function bb_createBall(_ballAmount, _diameter) {
 
 /*******************************************************/
 //function bb_startBtn()
-//Resizes Canvas to fit screen and 
+//Make Canvas to fit screen and start the game 
 //Called by: start button in s_gamePg
 //Input: N/A
 //Returns: N/A
@@ -91,11 +93,20 @@ function bb_createBall(_ballAmount, _diameter) {
 function bb_startBtn() {
 	console.log("bb_startBtn")
 
-	activeGame = 'bb';
 	//Resizes the canvas based on size of box on screen
 	var elmnt = document.getElementById("d_gameArea")
 	gameCanvas.resize(elmnt.offsetWidth, elmnt.offsetHeight)
 	gameCanvas.parent(d_gameArea)
+
+	
+	var btn = document.getElementById("b_startBtn")
+	if(btn.innerHTML == "Start"){
+		btn.innerHTML = "Stop";
+		activeGame = 'bb';
+	} else{
+		btn.innerHTML = "Start"
+		activeGame = '';
+	}
 }
 
 /**************************************************************/
