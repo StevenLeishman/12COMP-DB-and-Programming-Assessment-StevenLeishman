@@ -55,7 +55,7 @@ function fb_login(_dataRec) {
 			_dataRec.email = _user.email;
 			_dataRec.name = _user.displayName;
 			_dataRec.photoURL = _user.photoURL;
-			loginStatus = 'Logged in, please wait';
+			loginStatus = 'Logged in, Please wait';
 			ui_changeHTML("p_loginStatus","Login Status = " + loginStatus)
 			console.log('fb_login: status = ' + loginStatus);
 
@@ -72,11 +72,8 @@ function fb_login(_dataRec) {
 
 			var provider = new firebase.auth.GoogleAuthProvider();
 			firebase.auth().signInWithRedirect(provider);
-
 		}
 	}
-
-
 }
 
 /**************************************************************/
@@ -133,12 +130,10 @@ function fb_readAll(_path, _save, _functionToCall) {
 			readStatus = "No Record"
 			console.log(readStatus)
 		} else {
-			console.log(readStatus)
 			readStatus = "OK"
-			let dbData = snapshot.val()
-			console.log(dbData)
-
-			_functionToCall(readStatus, dbData,_save)
+			console.log(readStatus)
+			
+			_functionToCall(readStatus, snapshot, _save)
 		}
 	}
 
@@ -164,19 +159,18 @@ function fb_readRec(_path, _key, _save, _functionToCall) {
 	readStatus = "Pending"
 	console.log("readStatus = " + readStatus)
 	function gotRecord(snapshot) {
-		let dbData = snapshot.val()
 		if (snapshot.val() == null) {
 			//If no record
 			readStatus = "No Record"
 			console.log("readStatus = " + readStatus)
-			_functionToCall(readStatus,dbData, _save)
+			_functionToCall(readStatus,snapshot, _save)
 
 		} else {
 			// if record
 			readStatus = "OK"
 			console.log("readStatus = " + readStatus)
 
-			_functionToCall(readStatus,dbData, _save)
+			_functionToCall(readStatus,snapshot, _save)
 		}
 	}
 
@@ -197,12 +191,13 @@ function fb_readRec(_path, _key, _save, _functionToCall) {
 // Return:  
 /**************************************************************/
 function fb_processUserStats(_result,_dbData, _save) {
-	let dbKeys = Object.keys(_dbData)
+	let dbData = _dbData.val()
+	let dbKeys = Object.keys()
 	for (i = 0; i < dbKeys.length; i++) {
 		let key = dbKeys[i]
 		_save.push({
-			gameName: _dbData[key].gameName,
-			highScore: _dbData[key].highScore
+			gameName: dbData[key].gameName,
+			highScore: dbData[key].highScore
 		});
 	}
 	
@@ -216,36 +211,32 @@ function fb_processUserStats(_result,_dbData, _save) {
 /**************************************************************/
 function fb_processUserDetails(_result,_dbData, _save) {
 	console.log("fb_processUserDetails" + " _result = " + _result + " _save = " + _save)
+	let dbData = _dbData.val()
+
 	if(_result == "No Record"){
 		//Switch to register page if no recrod
 		ui_switchScreens("s_landPg", "s_regPg");
-
 		document.getElementById("p_regName").innerHTML = userDetails.name
 		document.getElementById("p_regEmail").innerHTML = userDetails.email
 	} else {
 		//if record save it to user object
-		_save.email = _dbData.email;
-		_save.name = _dbData.name;
-		_save.photoURL = _dbData.photoURL;
-		_save.age = _dbData.age;
-		_save.gender = _dbData.gender;
-		_save.phone = _dbData.phone;
-		_save.city = _dbData.city;
-		_save.suburb = _dbData.suburb;
-		_save.streetName = _dbData.streetName;
-		_save.houseNumber = _dbData.houseNumber;
-		_save.postalCode = _dbData.postalCode;
-		_save.backAccount = _dbData.backAccount;
-
-		console.log("_dbData = " + _dbData + "  _save = " + _save)
+		_save.email 			= dbData.email;
+		_save.name				= dbData.name;
+		_save.photoURL 		= dbData.photoURL;
+		_save.age 				= dbData.age;
+		_save.gender			= dbData.gender;
+		_save.phone 			= dbData.phone;
+		_save.city 				= dbData.city;
+		_save.suburb 			= dbData.suburb;
+		_save.streetName 	= dbData.streetName;
+		_save.houseNumber = dbData.houseNumber;
+		_save.postalCode	= dbData.postalCode;
+		_save.backAccount	= dbData.backAccount;
 
 		// switch screens to home page
 		ui_switchScreens("s_landPg","s_homePg")
 	}
-
-	
 }
-
 /**************************************************************/
 //    END OF PROG
 /**************************************************************/

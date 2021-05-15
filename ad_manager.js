@@ -130,7 +130,6 @@ function ad_processUSERReadAll(_result, _dbRec) {
 	    	email:        childData.email,
         // Left photoURL out as its so long the table will be too wide for the screen
         //photoURL:   childData.photoURL,  
-        gameName:     childData.gameName,
         phone:        childData.phone,
         age:          childData.age,
         gender:       childData.gender,
@@ -219,7 +218,7 @@ function ad_userInput(_feildName, _data) {
     gender:       'a',
     streetName:   'a',
     suburb:   		'a',
-    city:     		'c',
+    city:     		'a',
     postalCode: 	'n',
     uid:          'b',
 		bankAccount: 	'n',

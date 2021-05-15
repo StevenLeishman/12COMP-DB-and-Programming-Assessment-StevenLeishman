@@ -43,6 +43,7 @@
 	<script defer src="ui_manager.js">
 	</script>
 	<script defer src="ad_manager.js"></script>
+
 	<script defer src="reg_manager.js">
 
 	</script>
@@ -76,13 +77,13 @@
 	<section id="s_homePg"> 
 		<h1>Welcome to Stevens Game Website</h1> 
 		<h2>HomePage</h2>
-		<button class="w3-button w3-green homeBtnSize" 
+		<button class="w3-button w3-green BtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_gamePg')" >Pop The Ball </button>
 		
-		<button class="w3-button w3-green homeBtnSize" 
+		<button class="w3-button w3-green BtnSize b_adminBtn" 
 						onclick="ad_admin()" >Admin</button>
 		
-		<button class="w3-button w3-green homeBtnSize" 
+		<button class="w3-button w3-green BtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_landPg')" >Exit</button>
 	</section> 
 
@@ -105,20 +106,20 @@
         <p id="p_time">time : </p><br>
 
 				<!-- Instruction button -->
-				<button class="w3-button w3-green homeBtnSize" 
+				<button class="w3-button w3-green BtnSize" 
 								onclick="ui_switchScreens('s_gamePg','s_instructPg')">
 								Instructions</button><br>
 				
 				<!-- Leaderboard Button -->
-				<button class="w3-button w3-green homeBtnSize" 
+				<button class="w3-button w3-green BtnSize" 
 								onclick="ui_leaderboardBtn()">
 								Leaderboard</button><br>
 
 				<!--Admin Button  -->
-				<button class="w3-button w3-green homeBtnSize" 
+				<button class="w3-button w3-blue BtnSize b_adminBtn" 
 								onclick="ad_admin()" >Admin</button>
 
-				<button class="w3-button w3-green homeBtnSize" 
+				<button class="w3-button w3-green BtnSize" 
 						onclick="ui_switchScreens('s_gamePg','s_homePg')" >Return</button>
 			</div>
 

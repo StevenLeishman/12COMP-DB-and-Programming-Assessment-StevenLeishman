@@ -5,7 +5,8 @@ V1 base code from miniskills
 V2 game adapted to start from button
 V3 Button switchs from start to stop on click
 **************************************************************/
-
+var x = 50;
+var y = 50;
 /*******************************************************/
 //function createBall()
 //Creates the ball/s depending on _ballAmount and -_diameter
@@ -14,12 +15,12 @@ V3 Button switchs from start to stop on click
 //Returns: N/A
 /*******************************************************/
 function bb_createBall(_ballAmount, _diameter) {
-	console.log("bb_createBall(_ballAmount,-diameter)  / _ballAmount = " + 
-							_ballAmount + " / _diameter = " + _diameter)
+	console.log("bb_createBall(_ballAmount,-diameter)  / _ballAmount = " +
+		_ballAmount + " / _diameter = " + _diameter)
 	for (var i = 0; i < _ballAmount; i++) {
 		ballsArray[i] = {
-			posX: gameCanvas / 2,
-			posY: height / 2,
+			posX: gameCanvas.width  / 2,
+			posY: gameCanvas.height / 2,
 			diameter: _diameter,
 			speedX: random(velArray),
 			speedY: random(velArray),
@@ -28,6 +29,7 @@ function bb_createBall(_ballAmount, _diameter) {
 			colB: random(0, 255),
 
 			bb_display: function () {
+				background(128,128,128)
 				fill(this.colR, this.colG, this.colB);
 				ellipse(this.posX, this.posY, this.diameter);
 			},
@@ -68,7 +70,7 @@ function bb_createBall(_ballAmount, _diameter) {
 				for (var i = 0; i < ballsArray.length; i++) {
 					var px2Ball = dist(this.posX, this.posY, mouseX, mouseY);
 					if (px2Ball <= this.diameter / 2) {
-						console.log('px2Ball = '+ px2Ball + "  diameter = " + diameter)
+						console.log('px2Ball = ' + px2Ball + "  diameter = " + diameter)
 						ballHit = true;
 						ballsArray.splice(i, 1);
 					}
@@ -93,19 +95,38 @@ function bb_createBall(_ballAmount, _diameter) {
 function bb_startBtn() {
 	console.log("bb_startBtn")
 
+	//Changes between start and stop, which changes activeGame
+	var btn = document.getElementById("b_startBtn")
+	if (btn.innerHTML == "Start") {
+		btn.innerHTML = "Stop";
+		activeGame = 'bb';
+	} else {
+		btn.innerHTML = "Start"
+		activeGame = '';
+	}
+	console.log(activeGame)
+
 	//Resizes the canvas based on size of box on screen
 	var elmnt = document.getElementById("d_gameArea")
 	gameCanvas.resize(elmnt.offsetWidth, elmnt.offsetHeight)
 	gameCanvas.parent(d_gameArea)
+}
 
+/*******************************************************/
+//function bb_draw()
+//Calls all the functions that would normally be called by draw
+// only works when start button is clicked
+//Called by: draw()
+//Input: N/A
+//Returns: N/A
+/*******************************************************/
+function bb_draw() {
 	
-	var btn = document.getElementById("b_startBtn")
-	if(btn.innerHTML == "Start"){
-		btn.innerHTML = "Stop";
-		activeGame = 'bb';
-	} else{
-		btn.innerHTML = "Start"
-		activeGame = '';
+	for (var i = 0; i < ballsArray.length; i++) {
+		ballsArray[i].bb_movement()
+		ballsArray[i].bb_bounce()
+		ballsArray[i].bb_display()
+		gameCanvas.mousePressed(ballsArray[i].bb_checkBallHit)
 	}
 }
 

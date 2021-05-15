@@ -40,7 +40,7 @@ var gameCanvas;
 var activeGame = '';
 
 // Variables for the ball game
-const NUMBALLS = 100;
+const NUMBALLS = 3;
 const BALLDIA = 100;
 var ballsArray = [];
 var velArray = [3, 4, 5, 6, -3, -4, -5, -6];
@@ -48,6 +48,7 @@ var levelArray = [1, 1.5, 2.5, 4];
 var score = 0;
 var misses = 0;
 
+// highScoreArray for leaderboard
 var highScoreArray = []
 
 /*************************************************************************/
@@ -72,18 +73,10 @@ function setup() {
 // called by p5.js 60 times per second  
 /*************************************************************************/
 function draw() {
-	// general ui changes like text
-
-	// Ball game draw loop
+	//When the active game is bouncing ball
 	if (activeGame == 'bb') {
-		
-		for (var i = 0; i < ballsArray.length; i++) {
-			ballsArray[i].bb_movement()
-			ballsArray[i].bb_bounce()
-			ballsArray[i].bb_display()
-			//gameCanvas.onclick = ballsArray[i].bb_checkBallHit()
-		}
-		
+		//call ball draw loop
+		bb_draw()
 	}
 }
 
