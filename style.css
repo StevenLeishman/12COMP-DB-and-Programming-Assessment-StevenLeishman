@@ -67,8 +67,8 @@ html, body {
   overflow: scroll;
 }
 
-.b_adminBtn {
-  //display: none;   
+#b_hpAdmin {
+  display: none;   /* none = don't display element */
 }
 
 #b_gpAdmin {

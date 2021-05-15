@@ -59,8 +59,9 @@ function fb_login(_dataRec) {
 			ui_changeHTML("p_loginStatus","Login Status = " + loginStatus)
 			console.log('fb_login: status = ' + loginStatus);
 
-			//Call read function to 
+			//Call read function to check if the user has registered
 			fb_readRec(DETAILS, userDetails.uid, userDetails, fb_processUserDetails)
+
 		}
 		else {
 			// user NOT logged in, so redirect to Google login
@@ -97,20 +98,20 @@ function fb_logout() {
 // Return: 
 /**************************************************************/
 function fb_writeRec(_path, _key, _data) {
-	console.log('fb_WriteRec: path= ' + _path + '  key= ' + _key +
-		'  data= ' + _data.name + '/' + _data.score);
+  console.log('fb_WriteRec: path= ' + _path + '  key= ' + _key +
+    '  data= ' + _data.name + '/' + _data.score);
 
-	writeStatus = "Pending"
-	firebase.database().ref(_path + '/' + _key).update(_data,
-		function (error) {
-			if (error) {
-				writeStatus = "Failure"
-				console.log(error)
-			} else {
-				writeStatus = "OK"
-			}
-		}
-	);
+  writeStatus = "Pending"
+  firebase.database().ref(_path + '/' + _key).set(_data,
+    function (error) {
+      if (error) {
+        writeStatus = "Failure"
+        console.log(error)
+      } else {
+        writeStatus = "OK"
+      }
+    }
+  );
 }
 
 /**************************************************************/
@@ -206,7 +207,7 @@ function fb_processUserStats(_result,_dbData, _save) {
 // fb_processUserDetails
 // processess code given by read rec and saves it to user Object
 // Called by: fb_readRec()
-// Input: code to process and where to save it
+// Input: result of read, data to process and where to save it
 // Return:  
 /**************************************************************/
 function fb_processUserDetails(_result,_dbData, _save) {
@@ -233,9 +234,31 @@ function fb_processUserDetails(_result,_dbData, _save) {
 		_save.postalCode	= dbData.postalCode;
 		_save.backAccount	= dbData.backAccount;
 
+		fb_readRec(ROLES,userDetails.uid,'',fb_checkAdmin)
 		// switch screens to home page
-		ui_switchScreens("s_landPg","s_homePg")
 	}
+}
+
+/**************************************************************/
+// fb_checkAdmin
+// checks if the user is admin, displays admin button
+// Called by: fb_readRec() 
+// Input: result of read and data
+// Return:  
+/**************************************************************/
+function fb_checkAdmin(_result,_dbData){
+	let dbData = _dbData.val()
+	if (_result == "OK") {
+		if(dbData == 'admin'){
+			b_hpAdmin.style.display = "block"
+			b_gpAdmin.style.display = "block"
+		} else {
+			b_hpAdmin.style.display = "none"
+			b_gpAdmin.style.display = "none"
+		}
+	} 
+
+	ui_switchScreens("s_landPg","s_homePg")
 }
 /**************************************************************/
 //    END OF PROG

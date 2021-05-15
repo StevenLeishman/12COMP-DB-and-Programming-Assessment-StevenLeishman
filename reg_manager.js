@@ -59,14 +59,8 @@ function reg_regDetailsEntered() {
 /**************************************************************/
 function reg_getFormItemValue(_elementId, _item) {
   console.log('reg_getFormItemValue: _elementId=' + _elementId +
-  	  ',  _item= ' + _item);
-    
-  var valError = true
-	var value = document.getElementById(_elementId).elements.item(_item).value;
-	
-	if(valError = false) {
-	 return value;
-	}
+  	  ',  _item= ' + _item);  
+	return document.getElementById(_elementId).elements.item(_item).value;
 }
 /**************************************************************/
 //    END OF PROG

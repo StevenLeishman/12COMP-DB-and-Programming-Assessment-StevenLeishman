@@ -7,9 +7,10 @@
 /*V3 change html function to use on login status and leaderboard and 
 leaderboard button added*/
 /*************************************************************************/
-//constants for database
+//constants for database paths
 const DETAILS = "userDetails"
 const STATS = "userStats"
+const ROLES = "userRoles"
 
 //userDetails object for database
 var userDetails = {
@@ -40,7 +41,7 @@ var gameCanvas;
 var activeGame = '';
 
 // Variables for the ball game
-const NUMBALLS = 3;
+const NUMBALLS = 5;
 const BALLDIA = 100;
 var ballsArray = [];
 var velArray = [3, 4, 5, 6, -3, -4, -5, -6];

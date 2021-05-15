@@ -4,9 +4,8 @@ Written by steven leishman 2021
 V1 base code from miniskills
 V2 game adapted to start from button
 V3 Button switchs from start to stop on click
+V4 Balls show up and move/bounce, no score/misses
 **************************************************************/
-var x = 50;
-var y = 50;
 /*******************************************************/
 //function createBall()
 //Creates the ball/s depending on _ballAmount and -_diameter
@@ -67,7 +66,7 @@ function bb_createBall(_ballAmount, _diameter) {
 			},
 			bb_checkBallHit: function () {
 				var ballHit = false;
-				for (var i = 0; i < ballsArray.length; i++) {
+				for (var i = ballsArray.length; i > 0; i--) {
 					var px2Ball = dist(this.posX, this.posY, mouseX, mouseY);
 					if (px2Ball <= this.diameter / 2) {
 						console.log('px2Ball = ' + px2Ball + "  diameter = " + diameter)
@@ -104,7 +103,6 @@ function bb_startBtn() {
 		btn.innerHTML = "Start"
 		activeGame = '';
 	}
-	console.log(activeGame)
 
 	//Resizes the canvas based on size of box on screen
 	var elmnt = document.getElementById("d_gameArea")
@@ -126,10 +124,14 @@ function bb_draw() {
 		ballsArray[i].bb_movement()
 		ballsArray[i].bb_bounce()
 		ballsArray[i].bb_display()
-		gameCanvas.mousePressed(ballsArray[i].bb_checkBallHit)
+		gameCanvas.mousePressed(myFunction)
 	}
 }
-
+function myFunction(){
+	for (var i = 0; i < ballsArray.length; i++){
+		ballsArray[i].bb_checkBallHit()
+	}
+}
 /**************************************************************/
 //   END OF PROG
 /**************************************************************/
