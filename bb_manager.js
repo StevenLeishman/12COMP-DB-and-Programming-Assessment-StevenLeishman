@@ -18,7 +18,8 @@ function bb_createBall(_ballAmount, _diameter) {
 		_ballAmount + " / _diameter = " + _diameter)
 	for (var i = 0; i < _ballAmount; i++) {
 		ballsArray[i] = {
-			posX: gameCanvas.width  / 2,
+			ballHit: false,
+			posX: gameCanvas.width / 2,
 			posY: gameCanvas.height / 2,
 			diameter: _diameter,
 			speedX: random(velArray),
@@ -28,57 +29,69 @@ function bb_createBall(_ballAmount, _diameter) {
 			colB: random(0, 255),
 
 			bb_display: function () {
-				background(128,128,128)
 				fill(this.colR, this.colG, this.colB);
 				ellipse(this.posX, this.posY, this.diameter);
 			},
 			bb_movement: function () {
 				//Adjusts position of the ball by the speed
-				this.posY = this.posY + this.speedY * levelArray[0];
-				this.posX = this.posX + this.speedX * levelArray[0];
+				this.posY = this.posY + this.speedY //* levelArray[0];
+				this.posX = this.posX + this.speedX //* levelArray[0];
 			},
 			bb_bounce: function () {
 				let rad = this.diameter / 2;
 				//checks if the ball is off screen on X axis
-				if (this.posX >= (width - (rad))) {
+				if (this.posX >= width - rad) {
 					//reverses the speeds of the balls and adjusts the position when hits the edge
 					this.speedX = this.speedX * -1;
-					this.posX = (width - (this.diameter / 2))
+					this.posX = width - rad;
 
 					//check if balls it is off the top of the screen  
-				} else if (this.posX <= (this.diameter / 2)) {
+				} else if (this.posX <= rad) {
 					//reverses the speed and adjusts the position
 					this.speedX = this.speedX * -1;
-					this.posX = this.diameter / 2;
+					this.posX = rad;
 				}
 
 				//checks if ball is off screen on Y axis
-				if (this.posY >= (height - (this.diameter / 2))) {
+				if (this.posY >= height - rad) {
 					//reverse the speed of the ball and adjusts the position
 					this.speedY = this.speedY * -1;
-					this.posY = height - this.diameter / 2;
+					this.posY = height - rad;
 
-				} else if (this.posY <= this.diameter / 2) {
+				} else if (this.posY <= rad) {
 					//reverse the speed of the ball and adjusts the position
 					this.speedY = this.speedY * -1;
-					this.posY = this.diameter / 2;
+					this.posY = rad;
 				}
 			},
 			bb_checkBallHit: function () {
-				var ballHit = false;
-				for (var i = ballsArray.length; i > 0; i--) {
-					var px2Ball = dist(this.posX, this.posY, mouseX, mouseY);
-					if (px2Ball <= this.diameter / 2) {
-						console.log('px2Ball = ' + px2Ball + "  diameter = " + diameter)
-						ballHit = true;
-						ballsArray.splice(i, 1);
+				let rad = this.diameter / 2;
+				var px2Ball = dist(this.posX, this.posY, mouseX, mouseY)
+
+				// check if mouse is on ball
+				if (px2Ball <= rad) {
+					console.log("within")
+					this.ballHit = true
+				}
+				console.log(this.ballHit)
+
+				/*	let rad = _diameter/2
+					var ballHit = false;
+					for(i=0; i < ballsArray.length; i++){
+						var px2Ball = dist(this.posX, this.posY, mouseX, mouseY);
+						console.log("px2Ball = " + px2Ball)
+						if (px2Ball <= this.rad / 2) {
+							console.log('px2Ball = ' + px2Ball + "  rad = " + rad)
+							ballHit = true;
+							ballsArray.splice(i, 1);
+						}
 					}
-				}
-				if (ballHit) {
-					score++;
-				} else {
-					misses++;
-				}
+					if (ballHit) {
+						score++;
+					} else {
+						misses++;
+					}
+					*/
 			}
 		}
 	}
@@ -119,18 +132,28 @@ function bb_startBtn() {
 //Returns: N/A
 /*******************************************************/
 function bb_draw() {
-	
 	for (var i = 0; i < ballsArray.length; i++) {
 		ballsArray[i].bb_movement()
 		ballsArray[i].bb_bounce()
 		ballsArray[i].bb_display()
-		gameCanvas.mousePressed(myFunction)
 	}
+	gameCanvas.mousePressed(myFunction)
 }
-function myFunction(){
-	for (var i = 0; i < ballsArray.length; i++){
-		ballsArray[i].bb_checkBallHit()
+
+//Testing bb_checkBallHit - doesn't get rid off ball
+function myFunction() {
+	for (var i = ballsArray.length; i > 0; i--) {
+		let x = i-1;
+		ballsArray[x].ballHit = false
+		ballsArray[x].bb_checkBallHit()
+		if (ballsArray[x].ballHit == true) {
+			hits++;
+			ballsArray.splice(x,1)
+		} else {
+			misses++
+		}
 	}
+
 }
 /**************************************************************/
 //   END OF PROG

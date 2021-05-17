@@ -193,7 +193,7 @@ function fb_readRec(_path, _key, _save, _functionToCall) {
 /**************************************************************/
 function fb_processUserStats(_result,_dbData, _save) {
 	let dbData = _dbData.val()
-	let dbKeys = Object.keys()
+	let dbKeys = Object.keys(dbData)
 	for (i = 0; i < dbKeys.length; i++) {
 		let key = dbKeys[i]
 		_save.push({
@@ -201,7 +201,10 @@ function fb_processUserStats(_result,_dbData, _save) {
 			highScore: dbData[key].highScore
 		});
 	}
-	
+	//Change the leaderboard text
+	for(i = 0; i < highScoreArray.length; i++){
+		ui_changeHTML("li_leader"+ (i + 1), highScoreArray[i].gameName + ' ' + highScoreArray[i].highScore)
+	}
 }
 /**************************************************************/
 // fb_processUserDetails

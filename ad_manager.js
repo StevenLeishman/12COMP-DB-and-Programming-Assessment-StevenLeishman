@@ -150,7 +150,7 @@ function ad_processUSERReadAll(_result, _dbRec) {
     //  7 = COLUMMN NUMBER WHICH CONTAINS THE DATABASE KEY.              //<=======
     //  8 = DATABASE PATH THE RECORDS WERE READ FROM.                    //<=======
     ad_displayAll("t_userData", ad_adminArray, true,                     
-      "s_homePg", "s_gamePg", "s_adminPg", 12, DETAILS);        //<=======
+      "s_homePg", "s_gamePg", "s_adminPg", 11, DETAILS);        //<=======
   }
 }
 
@@ -462,7 +462,7 @@ function ad_clickEditCell(_tableId, _item, _path) {
             
       var data = {};
       var rtn  = [];      
-      rtn  = vd_userInput(_dbFieldName, td.innerHTML);
+      rtn  = ad_userInput(_dbFieldName, td.innerHTML);
       if (rtn[0]) {        // User input validated ok?
         data[_dbFieldName] = rtn[1];
         console.log("finishTdEdit: td.innerHTML = " + rtn[1] + 

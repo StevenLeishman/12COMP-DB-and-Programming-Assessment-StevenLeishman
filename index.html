@@ -80,7 +80,7 @@
 		<button class="w3-button w3-green BtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_gamePg')" >Pop The Ball </button>
 		
-		<button id="b_hpAdmin" class="w3-button w3-green BtnSize" 
+		<button id="b_hpAdmin" class="w3-button w3-yellow BtnSize" 
 						onclick="ad_admin()" >Admin</button>
 		
 		<button class="w3-button w3-green BtnSize" 
@@ -101,8 +101,9 @@
 				<button id="b_startBtn" class="w3-button w3-green" 
 					onclick="bb_startBtn()">Start</button>
 
-				<p id="p_misses">Misses : </p><br>
-        <p id="p_score">Score : </p><br>
+				<p id="p_misses">Misses : </p>
+				<p id="p_hits">Hits : </p>
+        <p id="p_score">Score : </p>
         <p id="p_time">time : </p><br>
 
 				<!-- Instruction button -->
@@ -116,7 +117,7 @@
 								Leaderboard</button><br>
 
 				<!--Admin Button  -->
-				<button id="b_gpAdmin" class="w3-button w3-blue BtnSize" 
+				<button id="b_gpAdmin" class="w3-button w3-yellow BtnSize" 
 								onclick="ad_admin()" >Admin</button>
 
 				<button class="w3-button w3-green BtnSize" 
@@ -349,9 +350,9 @@
     </nav>
       
     <div>
-      <div id="d_admin" class="w3-table-all w3-small w3-light-grey 
+      <div id="d_admin" class="w3-table-all w3-large w3-light-grey 
                                w3-hoverable w3-border w3-bordered content">
-	    <table id="t_userData"></table>
+	    <table id="t_userData" class="w3-text-black"></table>
 	  </div>
     </div>
   </section> 
