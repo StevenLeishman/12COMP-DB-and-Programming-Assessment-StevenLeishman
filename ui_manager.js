@@ -41,7 +41,7 @@ var gameCanvas;
 var activeGame = '';
 
 // Variables for the ball game
-const NUMBALLS = 5;
+const NUMBALLS = 15;
 const BALLDIA = 100;
 var ballsArray = [];
 var velArray = [4, 5, 6, 7, -4, -5, -6,-7];
@@ -49,6 +49,7 @@ var levelArray = [1, 1.5, 2.5, 4];
 var score = 0;
 var misses = 0;
 var hits = 0;
+var counter = 30;
 
 // highScoreArray for leaderboard
 var highScoreArray = []
@@ -117,6 +118,8 @@ function ui_leaderboardBtn (){
 /*************************************************************************/
 function ui_switchScreens(_hideScreen, _showScreen) {
 	console.log("ui_switchScreens() /" + " Active Screen = " + _showScreen)
+	document.getElementById("img_userImg").src = userDetails.photoURL;
+	document.getElementById("p_userName").innerHTML = userDetails.name;
 	document.getElementById(_hideScreen).style.display = "none";
 	document.getElementById(_showScreen).style.display = "block";
 }

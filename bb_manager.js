@@ -4,7 +4,8 @@ Written by steven leishman 2021
 V1 base code from miniskills
 V2 game adapted to start from button
 V3 Button switchs from start to stop on click
-V4 Balls show up and move/bounce, no score/misses
+V4 Ball shows up and move/bounce, no score/misses
+V5 Multiple Balls show, disapper on click, score faulty
 **************************************************************/
 /*******************************************************/
 //function createBall()
@@ -32,11 +33,13 @@ function bb_createBall(_ballAmount, _diameter) {
 				fill(this.colR, this.colG, this.colB);
 				ellipse(this.posX, this.posY, this.diameter);
 			},
+
 			bb_movement: function () {
 				//Adjusts position of the ball by the speed
 				this.posY = this.posY + this.speedY //* levelArray[0];
 				this.posX = this.posX + this.speedX //* levelArray[0];
 			},
+
 			bb_bounce: function () {
 				let rad = this.diameter / 2;
 				//checks if the ball is off screen on X axis
@@ -64,34 +67,19 @@ function bb_createBall(_ballAmount, _diameter) {
 					this.posY = rad;
 				}
 			},
-			bb_checkBallHit: function () {
+
+			bb_checkBallHit: function (_i) {
 				let rad = this.diameter / 2;
 				var px2Ball = dist(this.posX, this.posY, mouseX, mouseY)
-
 				// check if mouse is on ball
 				if (px2Ball <= rad) {
-					console.log("within")
-					this.ballHit = true
+          ballsArray.splice(_i, 1);
+					this.ballHit = true;
+          return true;
 				}
-				console.log(this.ballHit)
-
-				/*	let rad = _diameter/2
-					var ballHit = false;
-					for(i=0; i < ballsArray.length; i++){
-						var px2Ball = dist(this.posX, this.posY, mouseX, mouseY);
-						console.log("px2Ball = " + px2Ball)
-						if (px2Ball <= this.rad / 2) {
-							console.log('px2Ball = ' + px2Ball + "  rad = " + rad)
-							ballHit = true;
-							ballsArray.splice(i, 1);
-						}
-					}
-					if (ballHit) {
-						score++;
-					} else {
-						misses++;
-					}
-					*/
+        else {
+          return false;
+        }
 			}
 		}
 	}
@@ -112,15 +100,19 @@ function bb_startBtn() {
 	if (btn.innerHTML == "Start") {
 		btn.innerHTML = "Stop";
 		activeGame = 'bb';
+		timer = setInterval(bb_playTimer,1000)
 	} else {
 		btn.innerHTML = "Start"
 		activeGame = '';
+		clearInterval(timer)
 	}
 
 	//Resizes the canvas based on size of box on screen
 	var elmnt = document.getElementById("d_gameArea")
 	gameCanvas.resize(elmnt.offsetWidth, elmnt.offsetHeight)
-	gameCanvas.parent(d_gameArea)
+	gameCanvas.parent(d_gameArea);
+
+  gameCanvas.mousePressed(bb_clicked);
 }
 
 /*******************************************************/
@@ -137,24 +129,30 @@ function bb_draw() {
 		ballsArray[i].bb_bounce()
 		ballsArray[i].bb_display()
 	}
-	gameCanvas.mousePressed(myFunction)
+  
 }
 
 //Testing bb_checkBallHit - doesn't get rid off ball
-function myFunction() {
-	for (var i = ballsArray.length; i > 0; i--) {
-		let x = i-1;
-		ballsArray[x].ballHit = false
-		ballsArray[x].bb_checkBallHit()
-		if (ballsArray[x].ballHit == true) {
+function bb_clicked() {
+  var ballHit = false;
+  for (var i = 0; i < ballsArray.length; i++) {
+		result = ballsArray[i].bb_checkBallHit(i);
+		 if (result == true) {
 			hits++;
-			ballsArray.splice(x,1)
-		} else {
-			misses++
-		}
-	}
-
+      ballHit = true;
+		} 
+  }
+  if (ballHit == false) {
+    misses++;
+  }
+  console.log(" hits: " + hits + "  misses: " + misses); //DIAG
 }
+/**************************************************************/
+function bb_playTimer(){
+	ui_changeHTML("p_time","Time = " + counter)
+	counter--;
+}
+
 /**************************************************************/
 //   END OF PROG
 /**************************************************************/

@@ -120,7 +120,7 @@ function ad_processUSERReadAll(_result, _dbRec) {
       childKey = childSnapshot.key;
       childData = childSnapshot.val();
 
-      // ENSURE THE FEILDS YOU PUSH INTO THE ARRAY OF OBJECTS            //<=======
+      // ENSURE THE FIELDS YOU PUSH INTO THE ARRAY OF OBJECTS            //<=======
       //  MATCH YOUR FIREBASE RECORDS FOR THE PATH                       //<=======
       // NOTE: IF YOU USE THE SUPPLIED reg_manager.js mudule, THEN       //<=======
       //  YOU CAN LEAVE ALL THESE FILEDS AS THEY ARE AS THE REGISTRATION //<=======
@@ -174,7 +174,7 @@ function ad_processBBReadAll(_result, _dbRec) {
       childData = childSnapshot.val();
       console.log(Object.keys(childData));
 
-      // ENSURE THE FEILDS YOU PUSH INTO THE ARRAY OF OBJECTS            //<=======
+      // ENSURE THE FIELDS YOU PUSH INTO THE ARRAY OF OBJECTS            //<=======
       //  MATCH YOUR FIREBASE RECORDS FOR THE PATH                       //<=======
       ad_adminArray.push({     
         uid:  childKey,

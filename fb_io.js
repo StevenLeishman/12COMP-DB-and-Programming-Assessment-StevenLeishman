@@ -237,8 +237,9 @@ function fb_processUserDetails(_result,_dbData, _save) {
 		_save.postalCode	= dbData.postalCode;
 		_save.backAccount	= dbData.backAccount;
 
+		//CHECK IF ADMIN 
 		fb_readRec(ROLES,userDetails.uid,'',fb_checkAdmin)
-		// switch screens to home page
+		
 	}
 }
 
