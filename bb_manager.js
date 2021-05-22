@@ -237,16 +237,14 @@ function bb_gameOver(_result) {
 	counter = 0;
 	
 	console.log("highscore = " + userStats.highScore + "  score = " + score)
-	// set users score as highscore if higher
-	if(score > userStats.highScore){
-		
-		userStats.highScore = score;
-	}
-	
-	// Write highscores to database
-	fb_writeRec(STATS,userDetails.uid,userStats);
-	console.table(userStats)
 
+	// set users score as highscore if higher than old highscore
+	if(score > userStats.highScore){
+		userStats.highScore = score;
+
+		// Write highscores to database
+	fb_writeRec(STATS,userDetails.uid,userStats);
+	}
 }
 /**************************************************************/
 //   END OF PROG
