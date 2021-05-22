@@ -49,7 +49,7 @@ var levelArray = [1, 1.5, 2.5, 4];
 var score = 0;
 var misses = 0;
 var hits = 0;
-var counter = 30;
+var counter = 10;
 
 // highScoreArray for leaderboard
 var highScoreArray = []
@@ -59,16 +59,11 @@ var highScoreArray = []
 // called by p5.js once when program is started
 /*************************************************************************/
 function setup() {
-
-	//Miscellaneous setup
-	gameCanvas = createCanvas(0, 0);
-
 	// FIREBASE SETUP 
 	fb_initialise()
 
-	//bb set up 
-	bb_createBall(NUMBALLS, BALLDIA)
-
+	//Miscellaneous setup
+	gameCanvas = createCanvas(0, 0);
 }
 
 /*************************************************************************/
@@ -83,7 +78,6 @@ function draw() {
 	if (activeGame == 'bb') {
 		//call ball draw loop
 		bb_draw();
-		ui_updateBBScores();
 	}
 }
 
@@ -106,7 +100,7 @@ function windowResized() {
 function ui_leaderboardBtn (){
 	console.log("ui_leaderboardBtn")
 	ui_switchScreens("s_gamePg","s_leaderPg")
-	fb_readAll(STATS,highScoreArray,fb_processUserStats)
+	fb_readAll(STATS,highScoreArray,fb_createLeaderboard)
 }
 
 /*************************************************************************/
@@ -124,26 +118,13 @@ function ui_switchScreens(_hideScreen, _showScreen) {
 
 /*************************************************************************/
 // ui_changeHTML(_elmntID,_product)
-// Displays a screen and hides another
-// Called by: Draw
-// Input: Which screen to dispay and hide
+// Changes the provided element to the product 
+// Called by: various
+// Input: element to change and product to change it to
 // Output: n/a
 /*************************************************************************/
 function ui_changeHTML(_elmntID, _product) {
 	document.getElementById(_elmntID).innerHTML = _product;
-}
-
-/*************************************************************************/
-// ui_changeHTML(_elmntID,_product)
-// Displays a screen and hides another
-// Called by: Draw
-// Input: Which screen to dispay and hide
-// Output: n/a
-/*************************************************************************/
-function ui_updateBBScores() {
-	ui_changeHTML("p_misses", "Misses = " + misses)
-	ui_changeHTML("p_hits", "Hits = " + hits)
-	ui_changeHTML("p_score", "Score = " + (hits - misses))
 }
 /**************************************************************/
 //    END OF PROG

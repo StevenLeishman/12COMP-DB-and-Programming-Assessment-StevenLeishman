@@ -67,11 +67,10 @@
 		<button class="w3-button w3-green BtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_landPg')" >Exit</button><br>
 
-		<div class="w3-col m3 w3-card">
+		<div class="w3-col m3 w3-card w3-container">
 			<p>Welcome:</p>
-			<center><strong><p id="p_userName"></p><strong><br>
-			<img id="img_userImg" src=""></center>
-			<br>
+			<center><strong><p id="p_userName"></p></strong><br>
+			<img id="img_userImg" src=""></center><br>
 		</div><br>
 
 	</section> 
@@ -81,7 +80,7 @@
 	<!--*******************************************************--> 
 	<section id="s_gamePg">
 		<h1>Welcome to Stevens Game Website</h1>
-		<h2>GamePage</h2> 
+		<h2>POP THE BALL</h2> 
 
     <div class="w3-row">
 			<div class="w3-col m2 w3-container w3-red boxHeight">
@@ -92,8 +91,8 @@
 
 				<p id="p_misses">Misses : </p>
 				<p id="p_hits">Hits : </p>
-        <p id="p_score">Score : </p>
-        <p id="p_time">time : </p><br>
+        <p id="p_time">time : 10 </p>
+				<p id="p_score">Score : </p><br>
 
 				<!-- Instruction button -->
 				<button class="w3-button w3-green BtnSize" 
@@ -140,10 +139,10 @@
 			<div class="w3-container w3-light-grey w3-col m9 boxHeight">
 				<h2>Welcome to the instruction page</h2><br>
 				<ul>
-					<li>The aim of the game is to get the highest score in 30 seconds</li>
-					<li>To do this, you need to click on as many balls as you can until the time runs out. Your score is your hits minus your misses </li>
+					<li>The aim of the game is to get the highest score in 10 seconds</li>
+					<li>To do this, you need to click on as many balls as you can until the time runs out. Your final score is your hits minus your misses multiplied by your remaining time</li>
 					<li>Each ball you click will add one to your hits, but be careful, everytime you miss... </li>
-					<li>The game ends when your time is up</li>
+					<li>The game ends when your time is up, or you have clicked all the balls</li>
 				</ul>
 
 			</div>

@@ -3,7 +3,7 @@
 // Written by steven leishman 2021
 //v1 base code from firebase miniskills
 //v2 Switchs to registration if there is no record when login pressed 
-//V3 
+//V3 adapted for admin, _result added to proccess functions
 /**************************************************************/
 loginStatus = ''
 readStatus = ''
@@ -185,13 +185,13 @@ function fb_readRec(_path, _key, _save, _functionToCall) {
 }
 
 /**************************************************************/
-// fb_processUserStats
+// fb_createLeaderboard
 // Reads all userStats keys for leaderboard
 // Called by: fb_readAll
 // Input: key to read from and where to save it to 
 // Return:  
 /**************************************************************/
-function fb_processUserStats(_result,_dbData, _save) {
+function fb_createLeaderboard(_result,_dbData, _save) {
 	let dbData = _dbData.val()
 	let dbKeys = Object.keys(dbData)
 	for (i = 0; i < dbKeys.length; i++) {
@@ -240,10 +240,15 @@ function fb_processUserDetails(_result,_dbData, _save) {
 
 		ui_switchScreens("s_landPg","s_homePg")
 	}
-		document.getElementById("img_userImg").src = userDetails.photoURL;
-		document.getElementById("p_userName").innerHTML = userDetails.name;
+	//set the user card
+	document.getElementById("img_userImg").src = userDetails.photoURL;
+	document.getElementById("p_userName").innerHTML = userDetails.name;
+
 	//CHECK IF ADMIN 
-	fb_readRec(ROLES,userDetails.uid,'',fb_checkAdmin)
+	fb_readRec(ROLES,userDetails.uid,'',fb_checkAdmin);
+
+	// Read the stats record to add to userStats object
+	fb_readRec(STATS,userDetails.uid,userStats,fb_processUserStats);
 }
 
 /**************************************************************/
@@ -264,8 +269,24 @@ function fb_checkAdmin(_result,_dbData){
 			b_gpAdmin.style.display = "none"
 		}
 	} 
+}
 
-	
+/**************************************************************/
+// fb_processUserStats
+// processess code given by read rec and saves it to user Object
+// Called by: fb_readRec()
+// Input: result of read, data to process and where to save it
+// Return:  
+/**************************************************************/
+function fb_processUserStats(_result,_dbData, _save) {
+	console.log("fb_processUserStats " + " _result = " + _result + " _save = " + _save)
+	let dbData = _dbData.val()
+
+	if(_result == "OK"){
+		//if record save it to user object
+		_save.gameName = dbData.gameName
+		_save.highScore = Number(dbData.highScore)
+	} 
 }
 /**************************************************************/
 //    END OF PROG
