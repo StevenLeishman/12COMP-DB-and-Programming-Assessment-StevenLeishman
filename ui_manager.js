@@ -118,8 +118,6 @@ function ui_leaderboardBtn (){
 /*************************************************************************/
 function ui_switchScreens(_hideScreen, _showScreen) {
 	console.log("ui_switchScreens() /" + " Active Screen = " + _showScreen)
-	document.getElementById("img_userImg").src = userDetails.photoURL;
-	document.getElementById("p_userName").innerHTML = userDetails.name;
 	document.getElementById(_hideScreen).style.display = "none";
 	document.getElementById(_showScreen).style.display = "block";
 }

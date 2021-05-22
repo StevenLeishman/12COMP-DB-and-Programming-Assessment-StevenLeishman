@@ -56,10 +56,7 @@
 	<section id="s_homePg"> 
 		<h1>Welcome to Stevens Game Website</h1> 
 		<h2>HomePage</h2>
-		<div class="w3-col m4 w3-card">
-			<p id="p_userName"></p><br>
-			<img id="img_userImg" src="">
-		</div><br>
+		
 		
 		<button class="w3-button w3-green BtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_gamePg')" >Pop The Ball </button>
@@ -68,7 +65,15 @@
 						onclick="ad_admin()" >Admin</button>
 		
 		<button class="w3-button w3-green BtnSize" 
-						onclick="ui_switchScreens('s_homePg','s_landPg')" >Exit</button>
+						onclick="ui_switchScreens('s_homePg','s_landPg')" >Exit</button><br>
+
+		<div class="w3-col m3 w3-card">
+			<p>Welcome:</p>
+			<center><strong><p id="p_userName"></p><strong><br>
+			<img id="img_userImg" src=""></center>
+			<br>
+		</div><br>
+
 	</section> 
 
 	<!--*******************************************************--> 
@@ -179,7 +184,7 @@
 		<!--Registration form 
 		-------------------------------------------------------------->
     <div class="w3-container w3-col s12 m12 l12">
-      <form id="f_reg" class="w3-container w3-card-4 transparentBG">
+      <form id="f_reg" onsubmit="return false;" class="w3-container w3-card-4 transparentBG">
         <h1 class="w3-center headFont">Register</h1>
 
 				<!--First Row
@@ -244,7 +249,7 @@
                  alt="Number icon" width="40" height="40"></div>
           <div class="w3-rest">
             <input class="w3-input w3-border" required name="houseNumber" 
-                   type="Number" placeholder="House Number">
+                   type="number" placeholder="House Number">
           </div>
         </div>
 
@@ -296,8 +301,8 @@
           </div>
 					<div class="w3-col m1">.</div>
 					<div class="w3-rest">
-            <input type ="button" class="w3-input w3-border w3-green" 
-							onclick="reg_regDetailsEntered()" value="submit" name="Sumbit" placeholder="Sumbit">
+            <button  class="w3-input w3-border w3-green" 
+							onclick="reg_regDetailsEntered()" value="Submit">Submit</button>
           </div>
         </div>
 

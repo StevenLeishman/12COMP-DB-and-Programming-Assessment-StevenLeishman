@@ -222,6 +222,7 @@ function fb_processUserDetails(_result,_dbData, _save) {
 		ui_switchScreens("s_landPg", "s_regPg");
 		document.getElementById("p_regName").innerHTML = userDetails.name
 		document.getElementById("p_regEmail").innerHTML = userDetails.email
+	
 	} else {
 		//if record save it to user object
 		_save.email 			= dbData.email;
@@ -237,10 +238,12 @@ function fb_processUserDetails(_result,_dbData, _save) {
 		_save.postalCode	= dbData.postalCode;
 		_save.backAccount	= dbData.backAccount;
 
-		//CHECK IF ADMIN 
-		fb_readRec(ROLES,userDetails.uid,'',fb_checkAdmin)
-		
+		ui_switchScreens("s_landPg","s_homePg")
 	}
+		document.getElementById("img_userImg").src = userDetails.photoURL;
+		document.getElementById("p_userName").innerHTML = userDetails.name;
+	//CHECK IF ADMIN 
+	fb_readRec(ROLES,userDetails.uid,'',fb_checkAdmin)
 }
 
 /**************************************************************/
@@ -262,7 +265,7 @@ function fb_checkAdmin(_result,_dbData){
 		}
 	} 
 
-	ui_switchScreens("s_landPg","s_homePg")
+	
 }
 /**************************************************************/
 //    END OF PROG

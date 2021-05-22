@@ -22,7 +22,6 @@
 /**************************************************************/
 function reg_regDetailsEntered() {
   console.log('reg_regDetailsEntered'); 
-  
   // Save player's details from the form into your details and stats object
   
 	//Data for userStats                                        
@@ -39,15 +38,19 @@ function reg_regDetailsEntered() {
 	userDetails.postalCode  	= Number(reg_getFormItemValue("f_reg", 8));
 	userDetails.bankAccount		= Number(reg_getFormItemValue("f_reg", 9)); 
     
-  console.table(userDetails);
-  // call your function to write to details record firebase 
-	fb_writeRec(DETAILS,userDetails.uid,userDetails)
-	
-	// call your function to write to stats record firebase 
-	fb_writeRec(STATS,userDetails.uid,userStats)
+	console.log(document.getElementById("f_reg").checkValidity());
 
-	//Call function to switch to home screen
-	ui_switchScreens('s_regPg','s_homePg')
+	if(document.getElementById("f_reg").checkValidity() == true){
+		console.log(document.getElementById("f_reg").checkValidity())
+  	// call your function to write to details record firebase 
+		fb_writeRec(DETAILS,userDetails.uid,userDetails)
+	
+		// call your function to write to stats record firebase 
+		fb_writeRec(STATS,userDetails.uid,userStats)
+
+		//Call function to switch to home screen
+		ui_switchScreens('s_regPg','s_homePg')
+	}
 }
 
 /**************************************************************/
