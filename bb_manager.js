@@ -104,20 +104,14 @@ function bb_startBtn() {
 
 	//Changes btn text between start and stop
 	var btn = document.getElementById("b_startBtn")
+
 	if (btn.innerHTML == "Start") {
 		btn.innerHTML = "Stop";
 		//Start the game
 		activeGame = 'bb';
-		// create the balls
-		bb_createBall(NUMBALLS, BALLDIA)
-
-		// Start/Reset timer
-		bb_timer = setInterval(bb_playTimer, 1000);
-		counter = 10;
-		ui_changeHTML("p_time", "Time : " + counter)
-
 		//reset scores
-		bb_resetScores()
+		bb_resetGame()
+
 	} else {
 		btn.innerHTML = "Start"
 		activeGame = '';
@@ -125,9 +119,6 @@ function bb_startBtn() {
 		//stop timer
 		clearInterval(bb_timer)
 	}
-
-	//Check the ball is being clicked
-	gameCanvas.mousePressed(bb_clicked);
 }
 
 /*******************************************************/
@@ -139,12 +130,17 @@ function bb_startBtn() {
 //Returns: N/A
 /*******************************************************/
 function bb_draw() {
+	//Check the ball is being clicked
+	gameCanvas.mousePressed(bb_clicked);
+
+	// Genreal movement of the balls
 	for (var i = 0; i < ballsArray.length; i++) {
 		ballsArray[i].bb_movement()
 		ballsArray[i].bb_bounce()
 		ballsArray[i].bb_display()
 	}
 
+	// end the game 
 	if (ballsArray.length <= 0) {
 		bb_gameOver('Win')
 	} else if (counter < 0) {
@@ -173,6 +169,7 @@ function bb_clicked() {
 		misses++;
 	}
 	console.log(" hits: " + hits + "  misses: " + misses + "  counter: " + counter); //DIAG
+	// keep the scores updated
 	bb_updateBBScores()
 }
 
@@ -189,16 +186,30 @@ function bb_playTimer() {
 }
 
 /**************************************************************/
-// bb_resetScores()
+// bb_resetGame()
 // Called by: bb_startBtn
 // Resets the scores when start button clicked
 // Input: N/A
 // Returns: N/A 
 /**************************************************************/
-function bb_resetScores() {
+function bb_resetGame() {
+	console.log('bb_resetGame')
+	//Reset score
 	score = 0;
 	hits = 0;
-	missses = 0;
+	misses = 0;
+
+	//create the balls
+	bb_createBall(NUMBALLS, BALLDIA)
+
+	// Start/Reset timer
+	bb_timer = setInterval(bb_playTimer, 1000);
+	counter = 10;
+	ui_changeHTML("p_time", "Time : " + counter)
+
+	
+	bb_gameResult.innerHTML = " h "
+	console.log(bb_gameResult.innerHTML)
 }
 
 /*************************************************************************/
@@ -213,12 +224,14 @@ function bb_updateBBScores() {
 	ui_changeHTML("p_hits", "Hits : " + hits)
 
 	score = (hits - misses) * (counter + 1)
+	if (score < 0) {
+		score = 0
+	}
 	ui_changeHTML("p_score", "Score : " + score)
 }
 
-/*************************************************************************/
+/*******************************************************************/
 // bb_gameOver()
-// 
 // Called by: bb_draw()
 // Input: result of game
 // Output: 
@@ -228,23 +241,23 @@ function bb_gameOver(_result) {
 	//stop the game
 	activeGame = '';
 
-	// Let user know their result
-	// NEEDS CHANGING FROM ALERT 
-	alert("You " + _result);
+	// set users score as highscore if higher than old highscore
+	if (score > userStats.highScore) {
+		userStats.highScore = score;
+		// Write highscores to database
+		fb_writeRec(STATS, userDetails.uid, userStats);
+	}
+	console.log("highscore = " + userStats.highScore + "  score = " + score)
 
 	// stop the timer
 	clearInterval(bb_timer);
 	counter = 0;
-	
-	console.log("highscore = " + userStats.highScore + "  score = " + score)
+	ui_changeHTML("p_time", "Time : " + counter)
 
-	// set users score as highscore if higher than old highscore
-	if(score > userStats.highScore){
-		userStats.highScore = score;
-
-		// Write highscores to database
-	fb_writeRec(STATS,userDetails.uid,userStats);
-	}
+	// Let user know their result
+	bb_gameResult.innerHTML = "You " + _result;
+	bb_gameResult.style('font-size', '100px')
+	bb_gameResult.position(gameCanvas.width / 2, 0)
 }
 /**************************************************************/
 //   END OF PROG

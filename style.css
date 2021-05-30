@@ -45,7 +45,10 @@ html, body {
 #s_leaderPg{
  	display: none;
   height: 95vh;
-  
+}
+
+#ol_leaderboardList{
+	font-size: 50px;
 }
 
 /* Registration Page Styling */

@@ -13,28 +13,40 @@
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- P5.js ------------------------------------------------------------------------>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js">
+	</script>
 
 	<!-- firebase start --------------------------------------------------------------->
 	<!-- Firebase App (core Firebase SDK) is always required & must be listed 1st -->
-	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js">
+	</script>
 	<!-- Add Firebase products that you want to use -->
-	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js">
+	</script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js">
+	</script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js">
+	</script>
 	<!-- firebase end ----------------------------------------------------------------->
 
-	<script src="fb_io.js"></script>
-	<script defer src="ui_manager.js"></script>
-	<script defer src="ad_manager.js"></script>
-	<script defer src="reg_manager.js"></script>
-	<script defer src="bb_manager.js"></script>
+	<script src="fb_io.js">
+	</script>
+	<script defer src="ui_manager.js">
+	</script>
+	<script defer src="ad_manager.js">
+	</script>
+	<script defer src="reg_manager.js">
+	</script>
+	<script defer src="bb_manager.js">
+	</script>
 </head>
 
 <!--*****************************************************-->
 <!--Body-->
 <!--*****************************************************-->
+
 <body class="w3-blue w3-container">
 
 	<!--*******************************************************-->
@@ -43,29 +55,23 @@
 	<section id="s_landPg">
 		<h1>Welcome to Stevens Game Website</h1>
 		<h2>LandPage</h2>
-		<button class="w3-button w3-green" 
-						onclick="fb_login(userDetails)" >login</button>
-		<button class="w3-button w3-red" 
-						onclick="fb_logout()" >logout</button><br>
-		<p id="p_loginStatus"> Login Status = </p>
-	</section> 
 
-	<!--*******************************************************--> 
+		<p id="p_loginStatus"> Login Status = </p>
+	</section>
+
+	<!--*******************************************************-->
 	<!--HOME PAGE-->
-	<!--*******************************************************--> 
-	<section id="s_homePg"> 
-		<h1>Welcome to Stevens Game Website</h1> 
+	<!--*******************************************************-->
+	<section id="s_homePg" class="w3-container">
+		<h1>Welcome to Stevens Game Website</h1>
 		<h2>HomePage</h2>
-		
-		
+
+
 		<button class="w3-button w3-green BtnSize" 
 						onclick="ui_switchScreens('s_homePg','s_gamePg')" >Pop The Ball </button>
 		
 		<button id="b_hpAdmin" class="w3-button w3-yellow BtnSize" 
-						onclick="ad_admin()" >Admin</button>
-		
-		<button class="w3-button w3-green BtnSize" 
-						onclick="ui_switchScreens('s_homePg','s_landPg')" >Exit</button><br>
+						onclick="ad_admin()" >Admin</button><br>
 
 		<div class="w3-col m3 w3-card w3-container">
 			<p>Welcome:</p>
@@ -93,6 +99,8 @@
 				<p id="p_hits">Hits : </p>
         <p id="p_time">time : 10 </p>
 				<p id="p_score">Score : </p><br>
+
+				<p id="p_highScore">Highscore : </p><br>
 
 				<!-- Instruction button -->
 				<button class="w3-button w3-green BtnSize" 
@@ -141,6 +149,7 @@
 				<ul>
 					<li>The aim of the game is to get the highest score in 10 seconds</li>
 					<li>To do this, you need to click on as many balls as you can until the time runs out. Your final score is your hits minus your misses multiplied by your remaining time</li>
+					<li>You can NOT get a negative score</li>
 					<li>Each ball you click will add one to your hits, but be careful, everytime you miss... </li>
 					<li>The game ends when your time is up, or you have clicked all the balls</li>
 				</ul>
@@ -159,18 +168,19 @@
 		<div class="w3-row">
 			<div class="w3-container w3-red boxHeight w3-col m2">
 				<h2>Control Panel</h2><br>
-				<p id=""
 				<button class="w3-button w3-green" 
 								onclick="ui_switchScreens('s_leaderPg','s_gamePg')">
 								Return</button>
 			</div>
 
 			<div class="w3-container w3-light-grey w3-col m9 boxHeight">
-				<ul>
-					<li id="li_leader1">test</li>
-					<li id="li_leader2">test</li>
-					<li id="li_leader3">test</li>
-				</ul>
+				<ol id="ol_leaderboardList">
+					<li id="li_leader1">test 1</li>
+					<li id="li_leader2">test 2</li>
+					<li id="li_leader3">test3 </li>
+					<li id="li_leader4">test4</li>
+					<li id="li_leader5">test5</li>	
+				</ol>
 			</div>
 		</div>
 		
@@ -225,9 +235,9 @@
         <div class="w3-row w3-section">
           <div class="w3-col" style="width: 50px">
             <img src="images/noun_Gender Neutral_14064.png" 
-                 alt="Gender symbol" width="15%" height="30"></div>
+                 alt="Gender symbol" width="30px" height="30px"></div>
           <div class="w3-col m3">
-            <select id="gender" class="w3-col m3" style="height: 35px;">
+            <select id="gender" class="w3-col m3" style="height: 35px; width: 20vh">
               <option value="f">female</option>
               <option value="m">male</option>
               <option value="o">other</option>
@@ -239,7 +249,7 @@
             <img src="images/noun_age_2941875.png" 
                  alt="age" width="40" height="40"></div>
           <div class="w3-col m3">
-            <input class="w3-input w3-border" min="5" required name="age" 
+            <input class="w3-input w3-border" min="5" max="100" required name="age" 
                    type="number" placeholder="Age">
           </div>
 					<div class="w3-col m1">.</div>
@@ -248,7 +258,7 @@
                  alt="Number icon" width="40" height="40"></div>
           <div class="w3-rest">
             <input class="w3-input w3-border" required name="houseNumber" 
-                   type="number" max="1000" placeholder="House Number">
+                   type="number"min="1" max="1000" placeholder="House Number">
           </div>
         </div>
 
@@ -258,7 +268,7 @@
           <div class="w3-col" style="width: 50px">
             <img src="images/noun_City_3386652.png" 
                  alt="City Icon" width="40" height="30"></div>
-          <div class="w3-col m2">
+          <div class="w3-col m3">
             <input class="w3-input w3-border" required name="city" 
                    type="text" placeholder="City"></input>
           </div>
@@ -266,7 +276,7 @@
           <div class="w3-col" style="width: 50px">
             <img src="images/noun_neighborhood_1240929.png" 
                  alt="Suburb icon" width="40" height="40"></div>
-          <div class="w3-col m2">
+          <div class="w3-col m3">
             <input class="w3-input w3-border" required name="suburb" 
                    type="text" placeholder="Suburb">
           </div>
@@ -296,7 +306,7 @@
             <i class="w3-xlarge fas fa-money-check"></i></div>
           <div class="w3-col m3">
             <input class="w3-input w3-border" required name="bankAccount" 
-                   type="number" min="100000000000000" placeholder="Bank Details">
+                   type="number" min="100000000000" placeholder="Bank Details">
           </div>
 					<div class="w3-col m1">.</div>
 					<div class="w3-rest">

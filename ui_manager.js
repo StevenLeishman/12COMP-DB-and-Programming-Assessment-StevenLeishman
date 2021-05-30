@@ -33,8 +33,7 @@ var userDetails = {
 var userStats = {
 	gameName: '',
 	highScore: '',
-
-}
+};
 
 var gameCanvas;
 
@@ -50,9 +49,7 @@ var score = 0;
 var misses = 0;
 var hits = 0;
 var counter = 10;
-
-// highScoreArray for leaderboard
-var highScoreArray = []
+var bb_gameResult;
 
 /*************************************************************************/
 // function setup()
@@ -61,9 +58,12 @@ var highScoreArray = []
 function setup() {
 	// FIREBASE SETUP 
 	fb_initialise()
+	fb_login(userDetails,fb_processUserLogin)	
 
 	//Miscellaneous setup
 	gameCanvas = createCanvas(0, 0);
+
+	bb_gameResult = createP('test');
 }
 
 /*************************************************************************/
@@ -72,7 +72,6 @@ function setup() {
 /*************************************************************************/
 function draw() {
 	background(200,200,200)
-
 
 	//When the active game is bouncing ball
 	if (activeGame == 'bb') {
@@ -100,7 +99,7 @@ function windowResized() {
 function ui_leaderboardBtn (){
 	console.log("ui_leaderboardBtn")
 	ui_switchScreens("s_gamePg","s_leaderPg")
-	fb_readAll(STATS,highScoreArray,fb_createLeaderboard)
+	fb_createBBLeaderboard(STATS,5)
 }
 
 /*************************************************************************/
