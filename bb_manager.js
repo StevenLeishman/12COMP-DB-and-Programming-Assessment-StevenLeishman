@@ -7,7 +7,7 @@ V3 Button switchs from start to stop on click
 V4 Ball shows up and move/bounce, no score/misses
 V5 Multiple Balls show, disapper on click, score faulty
 V6 Mr G Fixed score
-V7 Timer works and game ends
+V7 Timer works and game ends with alert
 V8 Game writes highscore to db
 **************************************************************/
 /*******************************************************/
@@ -209,7 +209,7 @@ function bb_resetGame() {
 
 	
 	bb_gameResult.innerHTML = " h "
-	console.log(bb_gameResult.innerHTML)
+	console.log("bb_gameResult.innerHTML = " + bb_gameResult.innerHTML)
 }
 
 /*************************************************************************/

@@ -4,6 +4,7 @@
 //v1 base code from firebase miniskills
 //v2 Switchs to registration if there is no record when login pressed 
 //V3 adapted for admin, _result added to proccess functions
+//V4 creates a leaderboard with Highscores
 /**************************************************************/
 loginStatus = ''
 readStatus = ''
@@ -173,7 +174,7 @@ function fb_readRec(_path, _key, _save, _functionToCall) {
 // fb_createBBLeaderboard()
 // Reads all userStats paths for leaderboard
 // Called by: fb_readAll
-// Input: key to read f
+// Input: path to read records from and number of records to read
 // Return:  
 /**************************************************************/
 function fb_createBBLeaderboard(_path, _numRec) {
@@ -195,10 +196,14 @@ function fb_createBBLeaderboard(_path, _numRec) {
 
 				var leaderboardGameName = childData.gameName
 				var leaderboardHighScore = childData.highScore
-				ui_changeHTML("li_leader"+_numRec, leaderboardGameName + " --> Highscore : " + leaderboardHighScore)
+				
+				// PART OF ALTERNATE WAY OF DISPLAYING LEADERBOARD
+				// fb_createLeaderboardList(leaderboardGameName + " --> Highscore : " + leaderboardHighScore)
+				
+				ui_changeHTML("li_leader"+_numRec, leaderboardGameName + " : Highscore : " + leaderboardHighScore)
 				_numRec--
+			
 			})
-			// highScoreArray doensnt matter at all --> nothing in it
 		}
 	}
 
@@ -210,6 +215,20 @@ function fb_createBBLeaderboard(_path, _numRec) {
 		}
 	}
 }
+
+
+/****************************************************/
+// ALTERNATE way of displaying leaderboard, delete if no time
+/****************************************************/
+// // GOT FROM STACK OVERFLOW
+// function fb_createLeaderboardList(_data){
+// 	console.log("fb_createLeaderboardList")
+// 	var ol = document.getElementById("ol_leaderboardList")
+// 	var li = document.createElement("li")
+// 	li.appendChild(document.createTextNode(_data))
+// 	ol.appendChild(li);
+// }
+/****************************************************/
 /**************************************************************/
 // fb_processUserDetails
 // processess code given by read rec and saves it to user Object

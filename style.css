@@ -2,6 +2,7 @@
   Written by Steven Leishman Term 1 2021
   
 *************************************************************/
+/* General styling */
 html, body {
   margin: 0px;
   padding: 0px;
@@ -9,52 +10,72 @@ html, body {
   color: black;
 }
 
+.boxHeight{
+	height: 80vh;
+}
+
 /* Landing Page stying */
 #s_landPg{
   display: block;
-  height: 95vh;
+  height: 90vh;
 }
 
 /* Home page stying */
 #s_homePg{
 	display: none;
-  height: 95vh;
+  height: 90vh;
 }
 
-.BtnSize{
- margin-top: 20px
+.hpBtnSize{
+	width: 95%;
+	margin-top: 20px;
+	margin-bottom: 20px
+}
+
+#d_homeButtons{
+	height: 40vh;
+}
+
+#d_userCard{
+	height: 40vh;
 }
 
 /* Game page stying */
 #s_gamePg{
   display: none;
-  height: 95vh;
+  height: 90vh;
 }
 
-.boxHeight{
-	height: 80vh;
+.gpBtnSize{
+	width: 100%;
+	margin-top: 10px
+	
 }
 
 /* Instruction page stying */
 #s_instructPg {
 	display: none;
-  height: 95vh;
+  height: 90vh;
+}
+
+#ul_bbInstruction{
+	font-size: 20px
 }
 
 /* Leaderboard page stying */
 #s_leaderPg{
  	display: none;
-  height: 95vh;
+  height: 90vh;
 }
 
 #ol_leaderboardList{
-	font-size: 50px;
+	font-size: 100%;
 }
 
 /* Registration Page Styling */
 #s_regPg{
   display: none;
-  height:  95vh;
+  height:  90vh;
 }
 
 .transparentBG {

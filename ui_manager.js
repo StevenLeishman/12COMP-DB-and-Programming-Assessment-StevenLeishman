@@ -62,8 +62,7 @@ function setup() {
 
 	//Miscellaneous setup
 	gameCanvas = createCanvas(0, 0);
-
-	bb_gameResult = createP('test');
+	//bb_gameResult = createP('test');
 }
 
 /*************************************************************************/
