@@ -69,7 +69,8 @@ html, body {
 }
 
 #ol_leaderboardList{
-	font-size: 100%;
+	font-size: 30px;
+	margin-left: 20px
 }
 
 /* Registration Page Styling */

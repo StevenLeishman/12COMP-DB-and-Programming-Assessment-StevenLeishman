@@ -143,7 +143,7 @@ function bb_draw() {
 	// end the game 
 	if (ballsArray.length <= 0) {
 		bb_gameOver('Win')
-	} else if (counter < 0) {
+	} else if (counter <= 0) {
 		bb_gameOver('Lose')
 	}
 }
@@ -207,9 +207,8 @@ function bb_resetGame() {
 	counter = 10;
 	ui_changeHTML("p_time", "Time : " + counter)
 
-	
-	bb_gameResult.innerHTML = " h "
-	console.log("bb_gameResult.innerHTML = " + bb_gameResult.innerHTML)
+
+	ui_changeHTML("p_bbGameResult", "Result : ")
 }
 
 /*************************************************************************/
@@ -246,6 +245,8 @@ function bb_gameOver(_result) {
 		userStats.highScore = score;
 		// Write highscores to database
 		fb_writeRec(STATS, userDetails.uid, userStats);
+		// change highscore on screen
+		ui_changeHTML("p_highScore", "Highscore : " + userStats.highScore)
 	}
 	console.log("highscore = " + userStats.highScore + "  score = " + score)
 
@@ -255,9 +256,8 @@ function bb_gameOver(_result) {
 	ui_changeHTML("p_time", "Time : " + counter)
 
 	// Let user know their result
-	bb_gameResult.innerHTML = "You " + _result;
-	bb_gameResult.style('font-size', '100px')
-	bb_gameResult.position(gameCanvas.width / 2, 0)
+	ui_changeHTML("p_bbGameResult", "Result : " + _result)
+	document.getElementById('p_bbGameResult').style.fontSize = "x_large";
 }
 /**************************************************************/
 //   END OF PROG

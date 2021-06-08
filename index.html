@@ -84,7 +84,7 @@
 				<!-- GAME button -->
 				<button class="w3-button w3-green hpBtnSize" onclick="ui_switchScreens('s_homePg','s_gamePg')" >Pop The Ball </button>
 				<!-- ADMIN BUTTON -->
-				<button id="b_hpAdmin" class="w3-button w3-yellow hpBtnSize" onclick="ad_admin()" >Admin</button>
+				<button id="b_hpAdmin" class="w3-button w3-yellow hpBtnSize" onclick="ad_admin('lpAdmin')" >Admin</button>
 				<!-- LOGOUT BUTTON -->
 				<button class="w3-button w3-red hpBtnSize" onclick="fb_logout()" >Logout</button>
 			</div>
@@ -118,13 +118,15 @@
 				<h2>Control Panel</h2>
 
 				<button id="b_startBtn" class="w3-button w3-green" 
-					onclick="bb_startBtn()">Start</button>
+								onclick="bb_startBtn()">Start</button>
 				<!-- Text showing users current game stats -->
 				<p id="p_misses">Misses : </p>
 				<p id="p_hits">Hits : </p>
         <p id="p_time">time : 10 </p>
 				<p id="p_score">Score : </p>
 				<p id="p_highScore">Highscore : </p><br>
+
+				<p id="p_bbGameResult">Result : </p><br>
 
 				<!-- Instruction button -->
 				<button class="w3-button w3-green gpBtnSize" 
@@ -138,14 +140,14 @@
 
 				<!--Admin Button  -->
 				<button id="b_gpAdmin" class="w3-button w3-yellow gpBtnSize" 
-								onclick="ad_admin()" >Admin</button>
+								onclick="ad_admin('gpAdmin')" >Admin</button>
 
 				<button class="w3-button w3-green gpBtnSize" 
 						onclick="ui_switchScreens('s_gamePg','s_homePg')" >Return</button>
 			</div>
 
 			<!-- Space where canvas will be  -->
-			<div id="d_gameArea" class="w3-col m9 w3-container boxHeight w3-light-grey" >
+			<div id="d_gameArea" class="w3-col m9 boxHeight w3-light-grey" >
 			</div>
 	</section> 
 
@@ -160,7 +162,7 @@
 		<div class="w3-row">
 			<div class="w3-container w3-red boxHeight w3-col m2">
 				<h2>Control Panel</h2>
-				<button class="w3-button w3-green" 
+				<button class="w3-button w3-green gpBtnSize" 
 							onclick="ui_switchScreens('s_instructPg','s_gamePg')" >
 							Return</button>
 				
@@ -191,12 +193,15 @@
 		<div class="w3-row">
 			<div class="w3-container w3-red boxHeight w3-col m2">
 				<h2>Control Panel</h2><br>
-				<button class="w3-button w3-green" 
+				<button class="w3-button w3-green gpBtnSize" 
 								onclick="ui_switchScreens('s_leaderPg','s_gamePg')">
 								Return</button>
 			</div>
 
-			<div class="w3-container w3-padding w3-light-grey w3-col m9 boxHeight">
+			<div class="w3-container w3-light-grey w3-col m9 boxHeight">
+				<!-- Header -->
+				<h2>Leaderboard</h2><br>
+				<!-- Leaderboard -->
 				<ol id="ol_leaderboardList">
 					<li id="li_leader1"></li>
 					<li id="li_leader2"></li>
@@ -249,7 +254,8 @@
             <i class="w3-xlarge fa fa-phone"></i></div>
           <div class="w3-rest">
             <input class="w3-input w3-border" required name="phone" 
-                   type="number" min="10000000" placeholder="Phone">
+                   type="number" min="10000000" max="10000000000"
+									 placeholder="Phone">
           </div>
         </div>
 
@@ -322,14 +328,14 @@
                  alt="postcode icon" width="40" height="40"></div>
           <div class="w3-col m3">
             <input class="w3-input w3-border" required name="postalCode" 
-                   type="number" min="1000" placeholder="Postal Code">
+                   type="number" min="1000" max="9999" placeholder="Postal Code">
           </div>
 					<div class="w3-col m1">.</div>
           <div class="w3-col" style="width: 50px">
             <i class="w3-xlarge fas fa-money-check"></i></div>
           <div class="w3-col m3">
             <input class="w3-input w3-border" required name="bankAccount" 
-                   type="number" min="100000000000" placeholder="Bank Details">
+                   type="number" min="100000000000" max="99999999999999999" placeholder="Bank Details">
           </div>
 					<div class="w3-col m1">.</div>
 					<div class="w3-rest">

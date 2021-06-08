@@ -39,7 +39,7 @@
 // Input:   
 // Return:
 /**************************************************************/
-function ad_admin() {
+function ad_admin(_buttonPressed) {
   console.log('ad_admin: ');
   
   // Display the ADMIN screen
@@ -47,7 +47,13 @@ function ad_admin() {
   s_gamePg.style.display    = "none";
   s_homePg.style.display = "none"; 
   s_adminPg.style.display   = "block";
-  ad_user();
+
+	// Checks which button was called and shows different dataset 
+	if(_buttonPressed == "gpAdmin"){
+		ad_BB();
+	} else if (_buttonPressed == "lpAdmin") {
+		ad_user();
+	}
 }
 
 /**************************************************************/
@@ -223,16 +229,8 @@ function ad_userInput(_feildName, _data) {
     uid:          'b',
 		bankAccount: 	'n',
 		houseNumber:	'n',
- 
-    BBLevel:      'n',
-    BBFails:      'n',
-    BBHits:       'n',
-    BBMiss:       'n',
-    BBTime:       'n',
-  
-    TTWin:        'a',
-    TTTLoss:      'n',
-    TTTTime:      'n'
+
+		highScore: 'n',
   };
     
   if (vd_dataTypes[_feildName] == 'n') {

@@ -49,7 +49,6 @@ var score = 0;
 var misses = 0;
 var hits = 0;
 var counter = 10;
-var bb_gameResult;
 
 /*************************************************************************/
 // function setup()
@@ -62,7 +61,6 @@ function setup() {
 
 	//Miscellaneous setup
 	gameCanvas = createCanvas(0, 0);
-	//bb_gameResult = createP('test');
 }
 
 /*************************************************************************/
@@ -84,8 +82,10 @@ function draw() {
 // called everytime the window is resized 
 /*****************************************************/
 function windowResized() {
+	if(activeGame == "bb"){
 	var elmnt = document.getElementById("d_gameArea")
 	resizeCanvas(elmnt.offsetWidth, elmnt.offsetHeight);
+	}
 }
 
 /*************************************************************************/
